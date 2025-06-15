@@ -1,0 +1,28 @@
+.image-large {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 15px rgba(8, 22, 223, 0.9);
+}
+
+.carte {
+  background-color: #7ebee9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(93, 15, 196, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.carte:hover {
+  transform: scale(1.02);
+}
+
+.carte img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
