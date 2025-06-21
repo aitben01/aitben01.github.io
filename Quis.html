@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Culture Quizz</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #021e38;
+        }
+
+        .navbar {
+            background: #1d06e9;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffd600;
+            margin-right: 18px;
+        }
+
+        .logo span {
+            color: #fff;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .navbar-menu>a {
+            margin: 0 14px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .navbar-menu>a:hover {
+            color: #ffd600;
+        }
+
+        .navbar-menu .icon {
+            margin-right: 6px;
+        }
+
+        .navbar-account {
+            margin-left: auto;
+            font-weight: bold;
+        }
+
+        .popular-quizz-bar {
+            background: #3e84ec;
+            padding: 14px 0 10px 0;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .popular-title {
+            color: #fff;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 0 24px 0 32px;
+            min-width: 120px;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .quizz-list {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .quizz-item {
+            text-align: center;
+            color: #fff;
+            min-width: 110px;
+            position: relative;
+        }
+
+        .quizz-item img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 3px solid #ff3c7e;
+            background: #fff;
+            object-fit: cover;
+            box-shadow: 0 2px 8px #0002;
+        }
+
+        .quizz-item .badge {
+            background: #ffd600;
+            color: #4b1fa6;
+            font-size: 0.8em;
+            font-weight: bold;
+            border-radius: 6px;
+            padding: 2px 8px;
+            position: absolute;
+            top: 2px;
+            right: 10px;
+            z-index: 2;
+            box-shadow: 0 1px 4px #0002;
+        }
+
+        .quizz-item-title {
+            font-size: 0.95em;
+            margin-top: 6px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .search-section {
+            background: #502dec;
+            padding: 38px 0 32px 0;
+            text-align: center;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><text x="10" y="50" font-size="40" fill="rgba(255,255,255,0.08)">🔍</text></svg>');
+        }
+
+        .search-title {
+            color: #fff;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 8px 0 0 8px;
+            border: none;
+            font-size: 1.1em;
+            outline: none;
+        }
+
+        .search-bar button {
+            background: #ff3c7e;
+            color: #fff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-bar button:hover {
+            background: #ffd600;
+            color: #4b1fa6;
+        }
+
+        @media (max-width: 900px) {
+            .quizz-list {
+                gap: 10px;
+            }
+
+            .popular-title {
+                margin-left: 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+
+            .navbar-menu {
+                flex-wrap: wrap;
+            }
+
+            .popular-title {
+                font-size: 1em;
+            }
+
+            .search-title {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">aitben01 <span>.github</span>.com</div>
+        <div class="navbar-menu">
+            <!-- <a href="#"><span class="icon">🔍</span> Tous les Quiz</a> -->
+            <a href="#"><span class="icon">📚</span> Quiz Culture G</a>
+            <a href="#"><span class="icon">📝</span> Question du Jour</a>
+            <a href="#"><span class="icon">👤</span> Personnalité</a>
+            <a href="#"><span class="icon">⚙️</span> Casse-Têtes</a>
+            <a href="#">Autres Jeux ▼</a>
+        </div>
+        <div class="navbar-account">Mon compte</div>
+    </div>
+    <div class="popular-quizz-bar">
+        <div class="popular-title">Quizz<br> les Plus <br>Populaires</div>
+        <div class="quizz-list">
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/virus.png" alt="Quiz fruits rouges">
+                <span class="badge">NOUVEAU</span>
+                <div class="quizz-item-title">Quiz fruits rouges</div>
+            </div>
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/laugh.png" alt="Quiz Humoristes">
+                <span class="badge">NOUVEAU</span>
+                <div class="quizz-item-title">Quiz Humoristes</div>
+            </div>
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/lion.png" alt="Animaux mortels">
+                <div class="quizz-item-title">Animaux mortels<br>pour l'homme</div>
+            </div>
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/word.png" alt="Mot codé">
+                <div class="quizz-item-title">Devin. le Mot<br>Codé du Jour</div>
+            </div>
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/family.png" alt="Quiz spécial Papa">
+                <div class="quizz-item-title">Quiz spécial Papa</div>
+            </div>
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/philosophy-book.png" alt="Quiz Philo">
+                <span class="badge">NOUVEAU</span>
+                <div class="quizz-item-title">Quiz Philo</div>
+            </div>
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/actor.png" alt="Quiz Tom Hanks">
+                <div class="quizz-item-title">Quiz Tom Hanks</div>
+            </div>
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/knight.png" alt="Quiz XVIIe siècle">
+                <div class="quizz-item-title">Quiz XVIIe siècle</div>
+            </div>
+            <div class="quizz-item">
+                <img src="https://img.icons8.com/color/96/traffic-jam.png" alt="Quiz Code de la route #5">
+                <div class="quizz-item-title">Quiz Code de la route #5</div>
+            </div>
+        </div>
+    </div>
+    <div class="search-section">
+        <div class="search-title">Rechercher un Quiz</div>
+        <form class="search-bar">
+            <input type="text" placeholder="Football, Disney, Harry Potter, Drapeaux...">
+            <button type="submit">OK</button>
+        </form>
+    </div>
+    <!DOCTYPE html>
+    <html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Thématiques Quiz</title>
+        <style>
+            body {
+                background: #f3f2fa;
+                font-family: Arial, sans-serif;
+                margin: 0;
+            }
+
+            .thematique-section {
+                max-width: 1100px;
+                margin: 40px auto 0 auto;
+                background: #f3f2fa;
+                padding: 32px 16px 0 16px;
+            }
+
+            .thematique-title {
+                font-size: 1.6em;
+                color: #3c3799;
+                font-weight: bold;
+                margin-bottom: 18px;
+                border-left: 4px solid #3c3799;
+                padding-left: 12px;
+                letter-spacing: 0.5px;
+            }
+
+            .thematique-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 18px;
+                justify-content: flex-start;
+            }
+
+            .thematique-card {
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 2px 12px #0001;
+                width: 140px;
+                min-height: 120px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 18px 8px 12px 8px;
+                transition: box-shadow 0.18s, transform 0.18s;
+                cursor: pointer;
+                border: 2px solid transparent;
+            }
+
+            .thematique-card:hover {
+                box-shadow: 0 6px 24px #3c379933;
+                border: 2px solid #3c3799;
+                transform: translateY(-4px) scale(1.04);
+            }
+
+            .thematique-card .emoji {
+                font-size: 2.2em;
+                margin-bottom: 10px;
+            }
+
+            .thematique-card .label {
+                color: #3c3799;
+                font-weight: bold;
+                font-size: 1.05em;
+                text-align: center;
+                margin-top: 2px;
+            }
+
+            .categories-btn {
+                display: block;
+                margin: 32px auto 0 auto;
+                background: #3c3799;
+                color: #fff;
+                border: none;
+                border-radius: 18px;
+                padding: 14px 38px;
+                font-size: 1.1em;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 2px 8px #3c379933;
+                transition: background 0.18s;
+            }
+
+            .categories-btn:hover {
+                background: #28236a;
+            }
+
+            @media (max-width: 900px) {
+                .thematique-grid {
+                    gap: 12px;
+                }
+
+                .thematique-card {
+                    width: 110px;
+                    min-height: 100px;
+                    padding: 12px 4px 8px 4px;
+                }
+            }
+
+            @media (max-width: 600px) {
+                .thematique-section {
+                    padding: 18px 2px 0 2px;
+                }
+
+                .thematique-title {
+                    font-size: 1.2em;
+                    padding-left: 6px;
+                }
+
+                .thematique-card {
+                    width: 46vw;
+                    min-width: 90px;
+                    font-size: 0.95em;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="thematique-section">
+            <div class="thematique-title">Thématiques</div>
+            <div class="thematique-grid">
+                <div class="thematique-card">
+                    <div class="emoji">📚</div>
+                    <div class="label">Culture Générale</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🌍</div>
+                    <div class="label">Géographie</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">👑</div>
+                    <div class="label">Histoire</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🎬</div>
+                    <div class="label">Cinéma</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🏀⚽</div>
+                    <div class="label">Sports</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🖍️</div>
+                    <div class="label">Langue française</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🔬</div>
+                    <div class="label">Sciences</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🦁</div>
+                    <div class="label">Animaux</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🇫🇷</div>
+                    <div class="label">France</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🎨</div>
+                    <div class="label">Arts</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">⚽</div>
+                    <div class="label">Football</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🏳️‍🌈</div>
+                    <div class="label">Drapeaux</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🧙‍♂️</div>
+                    <div class="label">Harry Potter</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🐭</div>
+                    <div class="label">Disney</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🍔</div>
+                    <div class="label">Alimentation</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🌱</div>
+                    <div class="label">Nature</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">🛞</div>
+                    <div class="label">Code de la route</div>
+                </div>
+                <div class="thematique-card">
+                    <div class="emoji">😈</div>
+                    <div class="label">Tests de personnalité</div>
+                </div>
+            </div>
+            <button class="categories-btn">Voir toutes les catégories</button>
+    </body>
+
+    </html>
+    <!-- Ajout d'un léger effet de fond animé -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #021e38 0%, #502dec 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 12px #0002;
+            border-bottom: 2px solid #ffd60033;
+        }
+
+        .navbar-account {
+            background: #ffd600;
+            color: #1d06e9;
+            padding: 8px 18px;
+            border-radius: 18px;
+            margin-left: 18px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .navbar-account:hover {
+            background: #ff3c7e;
+            color: #fff;
+        }
+
+        .quizz-item {
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+
+        .quizz-item:hover {
+            transform: translateY(-6px) scale(1.06);
+            box-shadow: 0 6px 24px #ff3c7e33;
+            z-index: 2;
+        }
+
+        .search-section {
+            border-radius: 0 0 32px 32px;
+            box-shadow: 0 4px 24px #0001;
+            margin-bottom: 32px;
+        }
+
+        .search-bar input {
+            box-shadow: 0 2px 8px #0001;
+            border: 1px solid #ffd600;
+            background: #fff9e6;
+            transition: border 0.2s;
+        }
+
+        .search-bar input:focus {
+            border: 2px solid #ff3c7e;
+            background: #fff;
+        }
+
+        .thematique-section {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 6px 32px #021e3822;
+            margin-top: 48px;
+            padding-top: 38px;
+        }
+
+        .thematique-title {
+            background: linear-gradient(90deg, #ffd600 0%, #ff3c7e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            border-left: 6px solid #ff3c7e;
+            padding-left: 18px;
+            font-size: 2em;
+            margin-bottom: 28px;
+        }
+
+        .thematique-card {
+            box-shadow: 0 2px 12px #3c379911;
+            border: 2px solid #ffd60022;
+            transition: box-shadow 0.18s, border 0.18s, transform 0.18s;
+            background: linear-gradient(135deg, #f3f2fa 60%, #ffd60011 100%);
+        }
+
+        .thematique-card:hover {
+            border: 2px solid #ff3c7e;
+            box-shadow: 0 6px 24px #ff3c7e33;
+            background: #fffbe6;
+        }
+
+        .categories-btn {
+            background: linear-gradient(90deg, #ff3c7e 0%, #ffd600 100%);
+            color: #3c3799;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px #ff3c7e33;
+            border: none;
+            transition: background 0.18s, color 0.18s;
+        }
+
+        .categories-btn:hover {
+            background: linear-gradient(90deg, #ffd600 0%, #ff3c7e 100%);
+            color: #fff;
+        }
+    </style>

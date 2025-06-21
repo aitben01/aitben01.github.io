@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jeux Mathématiques et QCM</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f5f5f5 100%);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(90deg, #2d89ef 60%, #6ec6ff 100%);
+            color: #fff;
+            padding: 32px 20px 24px 20px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(45, 137, 239, 0.10);
+            border-bottom-left-radius: 32px;
+            border-bottom-right-radius: 32px;
+        }
+
+        header h1 {
+            margin: 0 0 8px 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto 30px auto;
+            background: #fff;
+            padding: 40px 32px 32px 32px;
+            border-radius: 18px;
+            box-shadow: 0 6px 32px rgba(45, 137, 239, 0.08);
+        }
+
+        h2 {
+            color: #2d89ef;
+            margin-top: 0;
+            font-size: 2em;
+            font-weight: 700;
+            border-left: 6px solid #2d89ef;
+            padding-left: 12px;
+            margin-bottom: 24px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 24px;
+        }
+
+        li.jeu {
+            border: 1.5px solid #e3eafc;
+            border-radius: 12px;
+            padding: 22px 18px 18px 18px;
+            background: linear-gradient(120deg, #f9fbff 80%, #e3eafc 100%);
+            box-shadow: 0 2px 8px rgba(45, 137, 239, 0.04);
+            transition: transform 0.13s, box-shadow 0.13s;
+        }
+
+        li.jeu:hover {
+            transform: translateY(-4px) scale(1.025);
+            box-shadow: 0 8px 32px rgba(45, 137, 239, 0.10);
+            border-color: #b6d4fe;
+        }
+
+        .jeu strong {
+            font-size: 1.15em;
+            color: #1a4e89;
+            font-weight: 700;
+        }
+
+        .niveau {
+            font-size: 0.98em;
+            color: #6b7a8f;
+            margin-bottom: 8px;
+            margin-top: 4px;
+        }
+
+        .jeu p {
+            margin: 10px 0 16px 0;
+            color: #333;
+            font-size: 1em;
+        }
+
+        a {
+            color: #fff;
+            background: linear-gradient(90deg, #2d89ef 70%, #6ec6ff 100%);
+            text-decoration: none;
+            padding: 8px 22px;
+            border-radius: 22px;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 2px 8px rgba(45, 137, 239, 0.08);
+            transition: background 0.15s, box-shadow 0.15s;
+            display: inline-block;
+        }
+
+        a:hover {
+            background: linear-gradient(90deg, #1a4e89 70%, #2d89ef 100%);
+            box-shadow: 0 4px 16px rgba(45, 137, 239, 0.15);
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            main {
+                padding: 18px 6vw 18px 6vw;
+            }
+
+            ul {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            header {
+                padding: 24px 10px 16px 10px;
+            }
+        }
+    </style>
+</head>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Jeux Mathématiques et QCM</title>
+    <!-- <div id="menu"></div>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('menu').innerHTML = html);
+    </script> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #2d89ef;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #2d89ef;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        .jeu {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 18px;
+            background: #f9f9f9;
+        }
+
+        .niveau {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        a {
+            color: #2d89ef;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Jeux Mathématiques et QCM</h1>
+        <p>Pour les élèves du primaire au lycée</p>
+    </header>
+    <main>
+        <h2>Jeux Mathématiques</h2>
+        <ul>
+            <li class="jeu">
+                <strong>Sudoku</strong>
+                <div class="niveau">Niveau : Primaire, Collège, Lycée</div>
+                <p>Résolvez des grilles de Sudoku pour améliorer votre logique et votre concentration.</p>
+                <a href="https://sudoku.com/fr" target="_blank">Jouer</a>
+            </li>
+            <li class="jeu">
+                <strong>Casse-tête des allumettes</strong>
+                <div class="niveau">Niveau : Primaire, Collège</div>
+                <p>Déplacez les allumettes pour former des figures ou résoudre des équations.</p>
+                <a href="hhttps://www.animyjob.com/mag-article/45-enigmes-allumettes-les-casse-tete-les-plus-stimulants-a-resoudre/26-11-23/241"
+                    target="_blank">Jouer</a>
+            </li>
+            <li class="jeu">
+                <strong>Jeu du Compte est Bon</strong>
+                <div class="niveau">Niveau : Collège, Lycée</div>
+                <p>Utilisez les nombres proposés pour atteindre le résultat cible.</p>
+                <a href="https://www.culturequizz.com/compte-est-bon/" target="_blank">Jouer</a>
+            </li>
+            <li class="jeu">
+                <strong>Jeu des Énigmes Mathématiques</strong>
+                <div class="niveau">Niveau : Primaire, Collège, Lycée</div>
+                <p>Résolvez des énigmes pour stimuler votre réflexion mathématique.</p>
+                <a href="https://loisirs.toutcomment.com/article/enigmes-mathematiques-avec-solution-14497.html"
+                    target="_blank">Jouer</a>
+            </li>
+        </ul>
+
+        <h2>QCM Mathématiques</h2>
+        <ul>
+            <li class="jeu">
+                <strong>QCM pour le Primaire</strong>
+                <div class="niveau">Niveau : Primaire</div>
+                <p>Testez vos connaissances en mathématiques avec des QCM adaptés au primaire.</p>
+                <a href="https://www.logicieleducatif.fr/math/primaire.php" target="_blank">Accéder</a>
+            </li>
+            <li class="jeu">
+                <strong>QCM pour le Collège</strong>
+                <div class="niveau">Niveau : Collège</div>
+                <p>Révisez les notions du collège grâce à des QCM interactifs.</p>
+                <a href="https://www.mathsbook.fr/qcm-maths-college" target="_blank">Accéder</a>
+            </li>
+            <li class="jeu">
+                <strong>QCM pour le Lycée</strong>
+                <div class="niveau">Niveau : Lycée</div>
+                <p>Préparez-vous aux examens avec des QCM couvrant le programme du lycée.</p>
+                <a href="https://www.mathsbook.fr/qcm-maths-lycee" target="_blank">Accéder</a>
+            </li>
+        </ul>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Fruits rouges</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #eef2f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            background: #fff;
+        }
+
+        .header img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .info h1 {
+            margin: 0;
+            color: #7a2c90;
+        }
+
+        .badge {
+            display: inline-block;
+            margin: 10px;
+            padding: 8px 16px;
+            background-color: #d50057;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .question-block {
+            background-color: #382f6a;
+            color: white;
+            padding: 30px;
+        }
+
+        .question-block h2 {
+            margin-bottom: 20px;
+        }
+
+        .question-block img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            margin: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-true {
+            background-color: #e91e63;
+            color: white;
+        }
+
+        .btn-false {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .explanation {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .explanation img {
+            max-width: 300px;
+            border-radius: 10px;
+        }
+
+        .explanation p {
+            margin-top: 10px;
+            font-size: 15px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Summer_Berries.jpg/640px-Summer_Berries.jpg"
+                alt="Fruits rouges">
+            <div class="info">
+                <h1>Quiz spécial Fruits rouges</h1>
+                <div class="badge">14 Questions</div>
+                <div class="badge">Niveau Facile</div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <h2>QUESTION 1 / 14</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Mixed-berries.jpg/640px-Mixed-berries.jpg"
+                alt="Panier de fruits rouges">
+            <p>La mirabelle est un fruit rouge. Vrai ou faux ?</p>
+            <button class="btn btn-true">Vrai</button>
+            <button class="btn btn-false">Faux</button>
+        </div>
+
+        <div class="explanation">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Mirabelles_Lorraine.jpg/640px-Mirabelles_Lorraine.jpg"
+                alt="Mirabelles">
+            <p><strong>Faux.</strong> La mirabelle est une petite prune jaune sucrée, donc ce n'est pas un fruit rouge.
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

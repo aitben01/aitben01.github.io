@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<script></script>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Sudoku</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        td {
+            border: 1px solid #333;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            background: #fff;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 1.2em;
+            background: transparent;
+        }
+
+        /* Bold borders for 3x3 boxes */
+        td:nth-child(3),
+        td:nth-child(6) {
+            border-right: 2px solid #000;
+        }
+
+        tr:nth-child(3) td,
+        tr:nth-child(6) td {
+            border-bottom: 2px solid #000;
+        }
+
+        td:first-child {
+            border-left: 2px solid #000;
+        }
+
+        tr:first-child td {
+            border-top: 2px solid #000;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sudoku</h1>
+    <table id="sudoku-board"></table>
+    <div>
+        <button onclick="checkSudoku()">Check</button>
+        <button onclick="solveSudoku()">Solve</button>
+        <button onclick="clearSudoku()">Clear</button>
+    </div>
+    <script>
+        // Generate empty board
+        function createBoard() {
+            const board = document.getElementById('sudoku-board');
+            board.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const row = document.createElement('tr');
+                for (let j = 0; j < 9; j++) {
+                    const cell = document.createElement('td');
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.maxLength = 1;
+                    input.pattern = '[1-9]';
+                    input.oninput = function () {
+                        this.value = this.value.replace(/[^1-9]/g, '');
+                    };
+                    cell.appendChild(input);
+                    row.appendChild(cell);
+                }
+                board.appendChild(row);
+            }
+        }
+
+        function getBoard() {
+            const board = [];
+            const rows = document.querySelectorAll('#sudoku-board tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('input');
+                const rowData = [];
+                cells.forEach(cell => {
+                    rowData.push(cell.value ? parseInt(cell.value) : 0);
+                });
+                board.push(rowData);
+            });
+            return board;
+        }
+
+        function setBoard(board) {
+            const rows = document.querySelectorAll('#sudoku-board tr');
+            for (let i = 0; i < 9; i++) {
+                const cells = rows[i].querySelectorAll('input');
+                for (let j = 0; j < 9; j++) {
+                    cells[j].value = board[i][j] ? board[i][j] : '';
+                }
+            }
+        }
+
+        function clearSudoku() {
+            createBoard();
+        }
+
+        function checkSudoku() {
+            const board = getBoard();
+            if (isValidSudoku(board)) {
+                alert('Sudoku is valid so far!');
+            } else {
+                alert('There are errors in the Sudoku.');
+            }
+        }
+
+        function solveSudoku() {
+            const board = getBoard();
+            if (solve(board)) {
+                setBoard(board);
+            } else {
+                alert('No solution found.');
+            }
+        }
+
+        // Sudoku validation
+        function isValidSudoku(board) {
+            for (let i = 0; i < 9; i++) {
+                const row = new Set();
+                const col = new Set();
+                const box = new Set();
+                for (let j = 0; j < 9; j++) {
+                    // Row
+                    if (board[i][j]) {
+                        if (row.has(board[i][j])) return false;
+                        row.add(board[i][j]);
+                    }
+                    // Column
+                    if (board[j][i]) {
+                        if (col.has(board[j][i])) return false;
+                        col.add(board[j][i]);
+                    }
+                    // Box
+                    const boxRow = 3 * Math.floor(i / 3) + Math.floor(j / 3);
+                    const boxCol = 3 * (i % 3) + (j % 3);
+                    if (board[boxRow][boxCol]) {
+                        if (box.has(board[boxRow][boxCol])) return false;
+                        box.add(board[boxRow][boxCol]);
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Sudoku solver (backtracking)
+        function solve(board) {
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    if (board[row][col] === 0) {
+                        for (let num = 1; num <= 9; num++) {
+                            if (isSafe(board, row, col, num)) {
+                                board[row][col] = num;
+                                if (solve(board)) return true;
+                                board[row][col] = 0;
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function isSafe(board, row, col, num) {
+            for (let x = 0; x < 9; x++) {
+                if (board[row][x] === num || board[x][col] === num) return false;
+            }
+            const startRow = row - row % 3, startCol = col - col % 3;
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (board[startRow + i][startCol + j] === num) return false;
+                }
+            }
+            return true;
+        }
+
+        // Initialize board on page load
+        createBoard();
+    </script>
+    <div id="menu"></div>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('menu').innerHTML = html);
+    </script>
+    <script src="./sudoku.js"></script>
+</body>
+
+</html>

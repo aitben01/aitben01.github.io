@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<!-- Ajout d'un bandeau coloré et d'une animation subtile -->
+
+
+<style>
+    .top-banner {
+        background: linear-gradient(90deg, #4f8cff 60%, #0a06df 100%);
+        color: #fff;
+        text-align: center;
+        padding: 14px 0;
+        font-size: 1.15em;
+        letter-spacing: 1px;
+        font-weight: bold;
+        box-shadow: 0 2px 12px rgba(79, 140, 255, 0.10);
+        animation: bannerFadeIn 1.2s;
+    }
+
+    @keyframes bannerFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<div class="top-banner">
+    Bienvenue sur la page Lycée ! 🌟 Découvrez les maths autrement.
+</div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lycée</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', Arial, sans-serif;
+            background: #f9f6ee;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 1200px;
+            margin: 40px;
+            background: #4e4ee70e;
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(240, 237, 237, 0.884);
+            padding: 32px 24px 24px 24px;
+
+        }
+
+        h1 {
+            color: #e67e22;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            padding: 12px 18px;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+            font-size: 1.2em;
+            margin-bottom: 0;
+        }
+
+        .math {
+            background: linear-gradient(90deg, #4f8cff 60%, #0a06df 100%);
+            text-align: center;
+            font-size: x-large;
+        }
+
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 0;
+            margin-bottom: 32px;
+            background: #f7faf8;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        ul li {
+            padding: 12px 20px;
+            font-size: 1.1em;
+            transition: background 0.2s;
+        }
+
+        ul li:not(:last-child) {
+            border-bottom: 1px solid #d6cdcd;
+        }
+
+        ul li::before {
+            content: "★";
+            color: #ff4747;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #100118;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        ul li a:hover {
+            color: #d50032;
+            text-decoration: underline;
+        }
+
+        .para {
+            font-size: 1.1em;
+            color: #f6f7f8;
+            text-align: center;
+            margin-top: 16px;
+            margin-bottom: 32px;
+            line-height: 1.6;
+            font-weight: 200px;
+            padding: 0 16px;
+            background: #0541e7;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .level-card {
+            text-decoration: none;
+            color: #1205be;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1>Lycée</h1> -->
+    <div class="container">
+        <div class="levels-container" style="display: flex; gap: 16px; justify-content: center; margin-bottom: 24px;">
+            <div class="level-card">
+                <a href="Accueil.html">Accueil</a>
+            </div>
+            <div class="level-card">
+                <a href="pre-scolaire.html">Pré-scol</a>
+            </div>
+            <div class="level-card">
+                <a href="primaire.html">Primaire</a>
+            </div>
+            <div class="level-card">
+                <a href="Collège.html">Collège</a>
+            </div>
+            <div class="level-card">
+                <a href="lycee.html">Lycée</a>
+            </div>
+        </div>
+    </div>
+    <div class="section-title math">Mathématiques</div>
+
+    <p class="para">Choisissez un niveau scolaire pour explorer les ressources disponibles.</p>
+
+    <ul>
+        <li><a href="#">Tron commune</a></li>
+        <li><a href="#">1ère Bac</a></li>
+        <li><a href="#">2ème Bac</a></li>
+    </ul>
+</body>
+
+</html>
+<style>
+    /* Modern footer for teens */
+    .footer {
+        background: linear-gradient(90deg, #4f8cff 60%, #0a06df 100%);
+        color: #fff;
+        text-align: center;
+        padding: 18px 0 10px 0;
+        border-radius: 16px 16px 0 0;
+        margin-top: 40px;
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        box-shadow: 0 -2px 12px rgba(79, 140, 255, 0.08);
+        position: relative;
+    }
+
+    .footer a {
+        color: #fff;
+        margin: 0 10px;
+        text-decoration: underline wavy #ff4747;
+        font-weight: bold;
+        transition: color 0.2s;
+    }
+
+    .footer a:hover {
+        color: #ffea00;
+    }
+
+    /* Add some fun emoji for teens */
+    .footer .emoji {
+        font-size: 1.3em;
+        margin: 0 6px;
+        vertical-align: middle;
+    }
+</style>
+<div class="footer">
+    <span class="emoji">🚀</span>
+    Restez motivé et amusez-vous en apprenant !
+    <span class="emoji">✨</span>
+    | <a href="mailto:contact@lycee.com">Contact</a>
+    | <a href="#">Instagram</a>
+    <span class="emoji">📱</span>
+</div>

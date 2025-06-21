@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #4a90e2;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+    font-size: 2em;
+    letter-spacing: 2px;
+}
+
+.levels-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 60px auto;
+    max-width: 900px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #2009ee;
+    font-size: 1.2em;
+}
+
+.level-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 40px 30px;
+    text-align: center;
+    font-size: 14px;
+    width: 180px;
+
+    /* Set a fixed height for consistent card sizing */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.level-card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.15);
+}
+
+.level-card a {
+    text-decoration: none;
+    color: #4a90e2;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: block;
+}
