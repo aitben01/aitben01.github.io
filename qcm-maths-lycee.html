@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QCM Maths Lycée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f9ff;
+            padding: 30px;
+        }
+
+        .container {
+            background: #fff;
+            max-width: 480px;
+            margin: auto;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.13);
+        }
+
+        h2 {
+            color: #2c3e5d;
+        }
+
+        .answers {
+            margin: 24px 0;
+        }
+
+        button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            background: #eaf0fb;
+            border: 1px solid #acb9c6;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #c2d4ef;
+        }
+
+        .result {
+            font-size: 1.15rem;
+            margin-top: 16px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: #228B22;
+        }
+
+        .incorrect {
+            color: #B22222;
+        }
+
+        #nextBtn {
+            margin-top: 14px;
+        }
+
+        #score {
+            color: #2c3e5d;
+            margin: 18px 0 0;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>QCM Maths - Lycée</h2>
+        <div id="question"></div>
+        <div class="answers" id="answers"></div>
+        <div class="result" id="result"></div>
+        <button id="nextBtn" onclick="nextQuestion()" style="display:none;">Question suivante</button>
+        <div id="score"></div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "Quelle est la dérivée de f(x) = x² + 3x ?",
+                options: ["f'(x) = 2x + 3", "f'(x) = x + 3", "f'(x) = 2x + 1"],
+                answer: 0
+            },
+            {
+                question: "Résoudre l'équation : 2x - 5 = 9",
+                options: ["x = 2", "x = 7", "x = -7"],
+                answer: 1
+            },
+            {
+                question: "La probabilité d'obtenir pile en lançant une pièce équilibrée est :",
+                options: ["1/2", "1/4", "1"],
+                answer: 0
+            },
+            {
+                question: "Lequel de ces nombres est un nombre premier ?",
+                options: ["15", "17", "21"],
+                answer: 1
+            },
+            {
+                question: "La fonction f(x) = 1/x est définie sur :",
+                options: ["ℝ", "ℝ*", "ℝ⁺"],
+                answer: 1
+            },
+            {
+                question: "Une suite arithmétique de premier terme 4 et de raison 3 a pour deuxième terme :",
+                options: ["7", "3", "1"],
+                answer: 0
+            }
+        ];
+
+        let current = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            document.getElementById('result').textContent = '';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('nextBtn').textContent = 'Question suivante';
+
+            const q = questions[current];
+            document.getElementById('question').textContent = q.question;
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            q.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(idx);
+                answersDiv.appendChild(btn);
+            });
+            document.getElementById('score').textContent = '';
+        }
+
+        function checkAnswer(selected) {
+            const q = questions[current];
+            const resultDiv = document.getElementById('result');
+            if (selected === q.answer) {
+                resultDiv.textContent = "Bonne réponse !";
+                resultDiv.className = "result correct";
+                score++;
+            } else {
+                resultDiv.textContent = "Mauvaise réponse !";
+                resultDiv.className = "result incorrect";
+            }
+            // Désactiver tous les boutons
+            Array.from(document.getElementById('answers').children).forEach(btn => btn.disabled = true);
+            if (current < questions.length - 1) {
+                document.getElementById('nextBtn').style.display = 'inline-block';
+            } else {
+                document.getElementById('nextBtn').style.display = 'inline-block';
+                document.getElementById('nextBtn').textContent = 'Voir le score';
+            }
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function endQuiz() {
+            document.getElementById('question').textContent = "QCM terminé !";
+            document.getElementById('answers').innerHTML = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('score').textContent = `Votre score : ${score} / ${questions.length}`;
+            current = 0;
+            score = 0;
+            setTimeout(() => {
+                document.getElementById('score').textContent += " | Cliquez ici pour recommencer.";
+                document.getElementById('score').style.cursor = "pointer";
+                document.getElementById('score').onclick = () => {
+                    displayQuestion();
+                    document.getElementById('score').textContent = '';
+                    document.getElementById('score').style.cursor = "auto";
+                    document.getElementById('score').onclick = null;
+                };
+            }, 500);
+        }
+
+        // Affiche la première question au chargement
+        displayQuestion();
+    </script>
+</body>
+
+</html>
+<style>
+    .timer {
+        font-size: 1.1rem;
+        color: #2e5eaa;
+        background: #e3f0ff;
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        background: #e3f0ff;
+        border-radius: 8px;
+        height: 12px;
+        margin-bottom: 18px;
+        overflow: hidden;
+    }
+
+    .progress {
+        height: 100%;
+        background: linear-gradient(90deg, #2e5eaa 60%, #6db3f2 100%);
+        width: 0;
+        transition: width 0.3s;
+    }
+
+    .btn-restart {
+        background: #2e5eaa;
+        color: #fff;
+        border: none;
+        margin-top: 18px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 8px #b5cfff55;
+    }
+
+    .btn-restart:hover {
+        background: #1b3e6e;
+    }
+</style>
+<!-- Ajout d'un bouton et d'images illustratives -->
+<div style="text-align:center; margin-top:30px;">
+    <button class="btn-restart" onclick="displayQuestion()">Recommencer le QCM</button>
+    <div style="margin-top:24px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Function_graph.svg/200px-Function_graph.svg.png"
+            alt="Graphique fonction" style="width:120px; margin:8px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Die_face_1.svg/120px-Die_face_1.svg.png"
+            alt="Dé" style="width:60px; margin:8px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Prime_number.svg/120px-Prime_number.svg.png"
+            alt="Nombre premier" style="width:60px; margin:8px;">
+    </div>
+</div>
+<!-- Pour utiliser le même style que "qcm college", copiez-collez ici le bloc <style> du fichier qcm-college.html et remplacez le bloc <style> existant dans ce fichier. 
+Aucune modification supplémentaire n'est nécessaire à cet emplacement. -->

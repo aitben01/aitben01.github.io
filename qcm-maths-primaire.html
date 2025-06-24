@@ -1,0 +1,332 @@
+<!-- Bien sûr ! Voici un exemple simple de QCM (questionnaire à choix multiples) pour apprendre les maths au primaire,
+réalisé en HTML, CSS et JavaScript. Ce QCM affiche une question de mathématiques, propose 3 réponses, et indique si la
+réponse choisie est correcte ou non.
+
+```html name=qcm-maths-primaire.html -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QCM Maths Primaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8ff;
+            padding: 30px;
+        }
+
+        .container {
+            background: #fff;
+            max-width: 400px;
+            margin: auto;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #4682b4;
+        }
+
+        .answers {
+            margin: 20px 0;
+        }
+
+        button {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            background: #e6e6fa;
+            border: 1px solid #b0c4de;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #b0c4de;
+        }
+
+        .result {
+            font-size: 1.1rem;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: #228B22;
+        }
+
+        .incorrect {
+            color: #B22222;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>QCM Maths - Primaire</h2>
+        <div id="question"></div>
+        <div class="answers" id="answers"></div>
+        <div class="result" id="result"></div>
+        <button id="nextBtn" onclick="nextQuestion()" style="display:none;">Question suivante</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Combien font 3 + 4 ?",
+                options: ["5", "7", "8"],
+                answer: 1
+            },
+            {
+                question: "Combien font 6 - 2 ?",
+                options: ["4", "9", "2"],
+                answer: 0
+            },
+            {
+                question: "Combien font 5 x 2 ?",
+                options: ["7", "10", "12"],
+                answer: 1
+            },
+            {
+                question: "Combien font 9 ÷ 3 ?",
+                options: ["6", "3", "9"],
+                answer: 1
+            }
+            ,
+            {
+                question: "Quel est le résultat de 10 + 5 - 3 ?",
+                options: ["12", "15", "13"],
+                answer: 2
+            },
+            {
+                question: "Combien font 8 - 3 + 2 ?",
+                options: ["7", "6", "5"],
+                answer: 0
+            },
+            {
+                question: "Combien font 4 x 3 ?",
+                options: ["12", "10", "14"],
+                answer: 0
+            },
+            {
+                question: "Quel est le double de 6 ?",
+                options: ["12", "10", "14"],
+                answer: 0
+            }
+            ,
+            {
+                question: "Quel est le triple de 4 ?",
+                options: ["8", "12", "16"],
+                answer: 1
+            },
+            {
+                question: "Combien font 15 - 7 ?",
+                options: ["8", "7", "9"],
+                answer: 0
+            },
+            {
+                question: "Combien font 2 x 6 ?",
+                options: ["12", "8", "10"],
+                answer: 0
+            },
+            {
+                question: "Quel est le résultat de 18 ÷ 2 ?",
+                options: ["9", "8", "10"],
+                answer: 0
+            },
+            {
+                question: "Quel est le successeur de 19 ?",
+                options: ["18", "20", "21"],
+                answer: 1
+            },
+            {
+                question: "Combien font 7 + 5 ?",
+                options: ["11", "12", "13"],
+                answer: 1
+            },
+            {
+                question: "Quel est le plus petit nombre ?",
+                options: ["3", "7", "5"],
+                answer: 0
+            },
+            {
+                question: "Combien font 20 - 15 ?",
+                options: ["4", "5", "6"],
+                answer: 1
+            }
+            ,
+            {
+                question: "Quel est le carré de 3 ?",
+                options: ["6", "9", "12"],
+                answer: 1
+            },
+            {
+                question: "Combien font 14 + 2 ?",
+                options: ["16", "15", "18"],
+                answer: 0
+            },
+            {
+                question: "Quel est le résultat de 16 ÷ 4 ?",
+                options: ["2", "4", "8"],
+                answer: 1
+            },
+            {
+                question: "Combien font 11 - 8 ?",
+                options: ["2", "3", "4"],
+                answer: 1
+            }
+        ];
+
+        let current = 0;
+
+        function displayQuestion() {
+            document.getElementById('result').textContent = '';
+            document.getElementById('nextBtn').style.display = 'none';
+
+            const q = questions[current];
+            document.getElementById('question').textContent = q.question;
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            q.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(idx);
+                answersDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const q = questions[current];
+            const resultDiv = document.getElementById('result');
+            if (selected === q.answer) {
+                resultDiv.textContent = "Bonne réponse !";
+                resultDiv.className = "result correct";
+            } else {
+                resultDiv.textContent = "Mauvaise réponse !";
+                resultDiv.className = "result incorrect";
+            }
+            // Désactiver tous les boutons
+            Array.from(document.getElementById('answers').children).forEach(btn => btn.disabled = true);
+            document.getElementById('nextBtn').style.display = (current < questions.length - 1) ? 'inline-block' : 'none';
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                displayQuestion();
+            }
+        }
+
+        // Affiche la première question au chargement
+        displayQuestion();
+    </script>
+</body>
+
+</html>
+<!-- Ajout d'un score final et d'un chronomètre -->
+<script>
+    let score = 0;
+    let timer = 0;
+    let intervalId = null;
+
+    // Affichage du score et du chrono
+
+
+    const chronoDiv = document.createElement('div');
+    chronoDiv.style.marginBottom = "10px";
+    chronoDiv.style.fontWeight = "bold";
+    chronoDiv.id = "chrono";
+    document.querySelector('.container').insertBefore(chronoDiv, document.getElementById('question'));
+
+    function updateScore() {
+        scoreDiv.textContent = `Score : ${score} / ${questions.length}`;
+    }
+
+    function updateChrono() {
+        const min = String(Math.floor(timer / 60)).padStart(2, '0');
+        const sec = String(timer % 60).padStart(2, '0');
+        chronoDiv.textContent = `Chronomètre : ${min}:${sec}`;
+    }
+
+    function startChrono() {
+        timer = 0;
+        updateChrono();
+        intervalId = setInterval(() => {
+            timer++;
+            updateChrono();
+        }, 1000);
+    }
+
+    function stopChrono() {
+        clearInterval(intervalId);
+    }
+
+    // Modification des fonctions existantes
+    const oldDisplayQuestion = displayQuestion;
+    displayQuestion = function () {
+        oldDisplayQuestion();
+        updateScore();
+        updateChrono();
+    };
+
+    const oldCheckAnswer = checkAnswer;
+    checkAnswer = function (selected) {
+        const q = questions[current];
+        if (selected === q.answer) score++;
+        oldCheckAnswer(selected);
+        updateScore();
+        // Si dernière question, afficher le score final et arrêter le chrono
+        if (current === questions.length - 1) {
+            document.getElementById('nextBtn').style.display = 'none';
+            setTimeout(() => {
+                stopChrono();
+                document.getElementById('result').innerHTML += `<br><span style="color:#4682b4;">Quiz terminé !<br>Score final : ${score} / ${questions.length}<br>Temps : ${String(Math.floor(timer / 60)).padStart(2, '0')}:${String(timer % 60).padStart(2, '0')}</span>`;
+            }, 500);
+        }
+    };
+    // Appliquer le style de qcm-maths-college.html
+    document.body.style.background = "#e3f0ff";
+    document.querySelector('.container').style.background = "#f9fbff";
+    document.querySelector('.container').style.boxShadow = "0 4px 16px rgba(70, 130, 180, 0.15)";
+    document.querySelector('.container').style.border = "1px solid #b0c4de";
+    document.querySelector('.container').style.padding = "32px";
+    document.querySelector('.container').style.maxWidth = "480px";
+    document.querySelector('.container').style.borderRadius = "12px";
+    document.querySelector('h2').style.color = "#2a4d7a";
+    document.querySelector('h2').style.letterSpacing = "1px";
+    document.querySelectorAll('button').forEach(btn => {
+        btn.style.background = "#dbeafe";
+        btn.style.border = "1px solid #60a5fa";
+        btn.style.color = "#1e293b";
+        btn.style.fontWeight = "bold";
+        btn.style.fontSize = "1.05rem";
+        btn.style.borderRadius = "6px";
+        btn.style.transition = "background 0.2s, color 0.2s";
+    });
+    // Style dynamique pour les nouveaux boutons
+    const observer = new MutationObserver(() => {
+        document.querySelectorAll('button').forEach(btn => {
+            btn.style.background = "#dbeafe";
+            btn.style.border = "1px solid #60a5fa";
+            btn.style.color = "#1e293b";
+            btn.style.fontWeight = "bold";
+            btn.style.fontSize = "1.05rem";
+            btn.style.borderRadius = "6px";
+            btn.style.transition = "background 0.2s, color 0.2s";
+        });
+    });
+    observer.observe(document.getElementById('answers'), { childList: true });
+    // Lancer le chrono au chargement
+    startChrono();
+    // Ajoute le score final en haut
+
+</script>
+
+<!-- ameliorer ce QCM en ajoutant plus de questions, en améliorant le style ou en ajoutant des fonctionnalités comme un score final ou un chronomètre. -->
+
+<!-- Tu peux copier ce code dans un fichier `qcm-maths-primaire.html`, l’ouvrir dans un navigateur, et les enfants pourront
+s’entraîner avec ce petit QCM interactif. Si tu veux plus de questions ou d’autres fonctionnalités, demande-moi ! -->

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QCM Maths Collège</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef6fa;
+            padding: 30px;
+        }
+
+        .container {
+            background: #fff;
+            max-width: 450px;
+            margin: auto;
+            padding: 28px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2e5eaa;
+        }
+
+        .answers {
+            margin: 22px 0;
+        }
+
+        button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            background: #f0f5ff;
+            border: 1px solid #b5cfff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #b5cfff;
+        }
+
+        .result {
+            font-size: 1.15rem;
+            margin-top: 16px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: #228B22;
+        }
+
+        .incorrect {
+            color: #B22222;
+        }
+
+        #nextBtn {
+            margin-top: 12px;
+        }
+
+        #score {
+            color: #555;
+            margin: 16px 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>QCM Maths - Collège</h2>
+        <div id="question"></div>
+        <div class="answers" id="answers"></div>
+        <div class="result" id="result"></div>
+        <button id="nextBtn" onclick="nextQuestion()" style="display:none;">Question suivante</button>
+        <div id="score"></div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "Quelle est la fraction simplifiée de 24/36 ?",
+                options: ["2/3", "4/6", "3/5"],
+                answer: 0
+            },
+            {
+                question: "Résoudre : x + 7 = 13",
+                options: ["x = 20", "x = 6", "x = 7"],
+                answer: 1
+            },
+            {
+                question: "Quel est le résultat de 15% de 200 ?",
+                options: ["30", "25", "45"],
+                answer: 0
+            },
+            {
+                question: "Quelle est la valeur de √49 ?",
+                options: ["6", "8", "7"],
+                answer: 2
+            },
+            {
+                question: "Quelle est la forme développée de (a + b)² ?",
+                options: ["a² + 2ab + b²", "a² - 2ab + b²", "a² + b²"],
+                answer: 0
+            }
+        ];
+
+        let current = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            document.getElementById('result').textContent = '';
+            document.getElementById('nextBtn').style.display = 'none';
+
+            const q = questions[current];
+            document.getElementById('question').textContent = q.question;
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            q.options.forEach((option, idx) => {
+                const btn = document.createElement('button');
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(idx);
+                answersDiv.appendChild(btn);
+            });
+            document.getElementById('score').textContent = '';
+        }
+
+        function checkAnswer(selected) {
+            const q = questions[current];
+            const resultDiv = document.getElementById('result');
+            if (selected === q.answer) {
+                resultDiv.textContent = "Bonne réponse !";
+                resultDiv.className = "result correct";
+                score++;
+            } else {
+                resultDiv.textContent = "Mauvaise réponse !";
+                resultDiv.className = "result incorrect";
+            }
+            // Désactiver tous les boutons
+            Array.from(document.getElementById('answers').children).forEach(btn => btn.disabled = true);
+            document.getElementById('nextBtn').style.display = (current < questions.length - 1) ? 'inline-block' : 'none';
+            if (current === questions.length - 1) {
+                document.getElementById('nextBtn').textContent = "Voir le score";
+            }
+        }
+
+        function nextQuestion() {
+            if (current < questions.length - 1) {
+                current++;
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function endQuiz() {
+            document.getElementById('question').textContent = "QCM terminé !";
+            document.getElementById('answers').innerHTML = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('score').textContent = `Votre score : ${score} / ${questions.length}`;
+            current = 0;
+            score = 0;
+            setTimeout(() => {
+                document.getElementById('score').textContent += " | Cliquez ici pour recommencer.";
+                document.getElementById('score').style.cursor = "pointer";
+                document.getElementById('score').onclick = () => {
+                    displayQuestion();
+                    document.getElementById('score').textContent = '';
+                    document.getElementById('score').style.cursor = "auto";
+                    document.getElementById('score').onclick = null;
+                };
+            }, 500);
+        }
+
+        // Affiche la première question au chargement
+        displayQuestion();
+    </script>
+</body>
+
+</html>
+<!-- Ajout d'un chronomètre et amélioration du style moderne -->
+
+<style>
+    .timer {
+        font-size: 1.1rem;
+        color: #2e5eaa;
+        background: #e3f0ff;
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        background: #e3f0ff;
+        border-radius: 8px;
+        height: 12px;
+        margin-bottom: 18px;
+        overflow: hidden;
+    }
+
+    .progress {
+        height: 100%;
+        background: linear-gradient(90deg, #2e5eaa 60%, #6db3f2 100%);
+        width: 0;
+        transition: width 0.3s;
+    }
+
+    .btn-restart {
+        background: #2e5eaa;
+        color: #fff;
+        border: none;
+        margin-top: 18px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 8px #b5cfff55;
+    }
+
+    .btn-restart:hover {
+        background: #1b3e6e;
+    }
+</style>
+<script>
+    // Ajout de nouvelles questions
+    questions.push(
+        {
+            question: "Combien de côtés a un hexagone ?",
+            options: ["5", "6", "8"],
+            answer: 1
+        },
+        {
+            question: "Quel est le résultat de 7 × 8 ?",
+            options: ["54", "56", "64"],
+            answer: 1
+        },
+        {
+            question: "Quelle est la valeur de π (arrondie à 2 décimales) ?",
+            options: ["3.14", "2.72", "1.62"],
+            answer: 0
+        },
+        {
+            question: "Résoudre : 3x = 18",
+            options: ["x = 6", "x = 15", "x = 21"],
+            answer: 0
+        },
+        {
+            question: "Quel est le périmètre d’un carré de côté 5 cm ?",
+            options: ["20 cm", "25 cm", "10 cm"],
+            answer: 0
+        }
+        // Ajout de questions pour atteindre 45 au total
+        ,
+        {
+            question: "Quelle est la somme des angles d’un triangle ?",
+            options: ["180°", "90°", "360°"],
+            answer: 0
+        },
+        {
+            question: "Combien de côtés a un octogone ?",
+            options: ["6", "8", "10"],
+            answer: 1
+        },
+        {
+            question: "Quel est le résultat de 9 × 7 ?",
+            options: ["63", "56", "72"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la racine carrée de 81 ?",
+            options: ["8", "9", "7"],
+            answer: 1
+        },
+        {
+            question: "Quel est le double de 24 ?",
+            options: ["48", "42", "36"],
+            answer: 0
+        },
+        {
+            question: "Combien de minutes dans 2 heures ?",
+            options: ["120", "100", "60"],
+            answer: 0
+        },
+        {
+            question: "Résoudre : 5x = 35",
+            options: ["x = 7", "x = 5", "x = 6"],
+            answer: 0
+        },
+        {
+            question: "Quel est le tiers de 90 ?",
+            options: ["30", "60", "45"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la valeur de 2³ ?",
+            options: ["6", "8", "9"],
+            answer: 1
+        },
+        {
+            question: "Combien de centimètres dans un mètre ?",
+            options: ["10", "100", "1000"],
+            answer: 1
+        },
+        {
+            question: "Quel est le périmètre d’un rectangle de 4 cm sur 6 cm ?",
+            options: ["20 cm", "24 cm", "10 cm"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la moitié de 56 ?",
+            options: ["28", "26", "24"],
+            answer: 0
+        },
+        {
+            question: "Combien de zéros dans un million ?",
+            options: ["5", "6", "7"],
+            answer: 1
+        },
+        {
+            question: "Résoudre : x - 9 = 3",
+            options: ["x = 12", "x = 6", "x = 9"],
+            answer: 0
+        },
+        {
+            question: "Quel est le résultat de 100 ÷ 4 ?",
+            options: ["25", "20", "40"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la fraction équivalente à 0,5 ?",
+            options: ["1/2", "1/3", "2/3"],
+            answer: 0
+        },
+        {
+            question: "Combien de faces a un cube ?",
+            options: ["4", "6", "8"],
+            answer: 1
+        },
+        {
+            question: "Quel est le carré de 12 ?",
+            options: ["144", "24", "132"],
+            answer: 0
+        },
+        {
+            question: "Résoudre : 2x + 3 = 11",
+            options: ["x = 4", "x = 7", "x = 5"],
+            answer: 0
+        },
+        {
+            question: "Quel est le résultat de 3² + 4² ?",
+            options: ["25", "12", "49"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la valeur de 10% de 250 ?",
+            options: ["25", "20", "15"],
+            answer: 0
+        },
+        {
+            question: "Combien de côtés a un pentagone ?",
+            options: ["5", "6", "7"],
+            answer: 0
+        },
+        {
+            question: "Quel est le triple de 15 ?",
+            options: ["45", "30", "35"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la racine carrée de 64 ?",
+            options: ["6", "8", "7"],
+            answer: 1
+        },
+        {
+            question: "Résoudre : x/4 = 5",
+            options: ["x = 20", "x = 9", "x = 16"],
+            answer: 0
+        },
+        {
+            question: "Quel est le résultat de 5 × 12 ?",
+            options: ["60", "50", "72"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la fraction simplifiée de 18/24 ?",
+            options: ["3/4", "2/3", "4/6"],
+            answer: 0
+        },
+        {
+            question: "Combien de secondes dans une minute ?",
+            options: ["60", "100", "120"],
+            answer: 0
+        },
+        {
+            question: "Quel est le résultat de 7² ?",
+            options: ["49", "14", "21"],
+            answer: 0
+        },
+        {
+            question: "Résoudre : x + 15 = 22",
+            options: ["x = 7", "x = 8", "x = 6"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la valeur de 25% de 80 ?",
+            options: ["20", "25", "15"],
+            answer: 0
+        },
+        {
+            question: "Combien de côtés a un carré ?",
+            options: ["3", "4", "5"],
+            answer: 1
+        },
+        {
+            question: "Quel est le résultat de 11 × 11 ?",
+            options: ["121", "111", "101"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la racine carrée de 36 ?",
+            options: ["5", "6", "7"],
+            answer: 1
+        },
+        {
+            question: "Résoudre : 4x = 32",
+            options: ["x = 8", "x = 6", "x = 4"],
+            answer: 0
+        },
+        {
+            question: "Quel est le résultat de 8 × 5 ?",
+            options: ["40", "35", "45"],
+            answer: 0
+        },
+        {
+            question: "Quelle est la fraction équivalente à 0,25 ?",
+            options: ["1/4", "1/2", "1/3"],
+            answer: 0
+        },
+        {
+            question: "Combien de faces a une pyramide à base carrée ?",
+            options: ["5", "6", "4"],
+            answer: 0
+        },
+        {
+            question: "Quel est le carré de 9 ?",
+            options: ["81", "18", "27"],
+            answer: 0
+        },
+        {
+            question: "Résoudre : x - 5 = 10",
+            options: ["x = 15", "x = 5", "x = 10"],
+            answer: 0
+        },
+        {
+            question: "Quel est le résultat de 6 × 7 ?",
+            options: ["42", "36", "49"],
+            answer: 0
+        }
+    );
+
+    // Chronomètre
+    let timer = 0;
+    let interval = null;
+    let totalTime = 0;
+
+    // Affichage du timer et de la barre de progression
+    function updateTimerDisplay() {
+        let min = Math.floor(timer / 60);
+        let sec = timer % 60;
+        document.getElementById('timer').textContent = `⏰ Temps : ${min}:${sec.toString().padStart(2, '0')}`;
+        let progress = ((current) / questions.length) * 100;
+        document.querySelector('.progress').style.width = progress + "%";
+    }
+
+    // Démarrer le timer
+    function startTimer() {
+        timer = 0;
+        interval = setInterval(() => {
+            timer++;
+            updateTimerDisplay();
+        }, 1000);
+    }
+
+    // Arrêter le timer
+    function stopTimer() {
+        clearInterval(interval);
+        totalTime = timer;
+    }
+
+    // Ajout des éléments timer et barre de progression dans le DOM
+    const container = document.querySelector('.container');
+    const timerDiv = document.createElement('div');
+    timerDiv.className = 'timer';
+    timerDiv.id = 'timer';
+    container.insertBefore(timerDiv, container.children[1]);
+    const progressBar = document.createElement('div');
+    progressBar.className = 'progress-bar';
+    progressBar.innerHTML = '<div class="progress"></div>';
+    container.insertBefore(progressBar, container.children[2]);
+
+    // Modification de displayQuestion pour mettre à jour la barre de progression et le timer
+    const originalDisplayQuestion = displayQuestion;
+    displayQuestion = function () {
+        originalDisplayQuestion();
+        updateTimerDisplay();
+        if (current === 0 && !interval) startTimer();
+    };
+
+    // Modification de endQuiz pour afficher le temps total et un bouton recommencer
+    const originalEndQuiz = endQuiz;
+    endQuiz = function () {
+        stopTimer();
+        document.getElementById('question').textContent = "QCM terminé !";
+        document.getElementById('answers').innerHTML = '';
+        document.getElementById('result').textContent = '';
+        document.getElementById('nextBtn').style.display = 'none';
+        let min = Math.floor(totalTime / 60);
+        let sec = totalTime % 60;
+        document.getElementById('score').innerHTML = `
+            <span>Votre score : <b>${score} / ${questions.length}</b></span><br>
+            <span>Temps total : <b>${min}:${sec.toString().padStart(2, '0')}</b></span>
+        `;
+        // Bouton recommencer
+        if (!document.getElementById('restartBtn')) {
+            const restartBtn = document.createElement('button');
+            restartBtn.textContent = "Recommencer le QCM";
+            restartBtn.className = "btn-restart";
+            restartBtn.id = "restartBtn";
+            restartBtn.onclick = () => {
+                current = 0;
+                score = 0;
+                totalTime = 0;
+                startTimer();
+                displayQuestion();
+                document.getElementById('score').textContent = '';
+                restartBtn.remove();
+            };
+            document.getElementById('score').appendChild(restartBtn);
+        }
+    };
+
+    // Affiche la première question au chargement (déjà appelé)
+    updateTimerDisplay();
+    let username = localStorage.getItem('qcm_username') || '';
+    function askUsername() {
+        username = prompt("Entrez votre prénom ou pseudo :") || "Invité";
+        localStorage.setItem('qcm_username', username);
+    }
+    if (!username) askUsername();
+
+    // Affiche le nom d'utilisateur en haut du QCM
+    let userDiv = document.createElement('div');
+    userDiv.style.textAlign = "right";
+    userDiv.style.fontSize = "1rem";
+    userDiv.style.color = "#2e5eaa";
+    userDiv.style.marginBottom = "8px";
+    userDiv.id = "userDisplay";
+    userDiv.innerHTML = `👤 <b>${username}</b>`;
+    container.insertBefore(userDiv, container.firstChild);
+
+    // Met à jour l'affichage du score avec le nom d'utilisateur
+    const originalEndQuizWithUser = endQuiz;
+    endQuiz = function () {
+        stopTimer();
+        document.getElementById('question').textContent = "QCM terminé !";
+        document.getElementById('answers').innerHTML = '';
+        document.getElementById('result').textContent = '';
+        document.getElementById('nextBtn').style.display = 'none';
+        let min = Math.floor(totalTime / 60);
+        let sec = totalTime % 60;
+        document.getElementById('score').innerHTML = `
+            <span><b>${username}</b>, votre score : <b>${score} / ${questions.length}</b></span><br>
+            <span>Temps total : <b>${min}:${sec.toString().padStart(2, '0')}</b></span>
+        `;
+        // Bouton recommencer
+        if (!document.getElementById('restartBtn')) {
+            const restartBtn = document.createElement('button');
+            restartBtn.textContent = "Recommencer le QCM";
+            restartBtn.className = "btn-restart";
+            restartBtn.id = "restartBtn";
+            restartBtn.onclick = () => {
+                current = 0;
+                score = 0;
+                totalTime = 0;
+                startTimer();
+                displayQuestion();
+                document.getElementById('score').textContent = '';
+                restartBtn.remove();
+            };
+            document.getElementById('score').appendChild(restartBtn);
+        }
+    };
+    // Affiche le score final en haut du QCM après la fin
+    const originalEndQuizWithUserAndTopScore = endQuiz;
+    endQuiz = function () {
+        originalEndQuizWithUserAndTopScore();
+        // Ajoute le score final en haut
+        let min = Math.floor(totalTime / 60);
+        let sec = totalTime % 60;
+        let topScoreDiv = document.getElementById('topScoreDisplay');
+        if (!topScoreDiv) {
+            topScoreDiv = document.createElement('div');
+            topScoreDiv.id = 'topScoreDisplay';
+            topScoreDiv.style.textAlign = "center";
+            topScoreDiv.style.fontSize = "1.1rem";
+            topScoreDiv.style.color = "#228B22";
+            topScoreDiv.style.marginBottom = "10px";
+            container.insertBefore(topScoreDiv, userDiv.nextSibling);
+        }
+        topScoreDiv.innerHTML = `🎉 <b>${username}</b>, score final : <b>${score} / ${questions.length}</b> | Temps : <b>${min}:${sec.toString().padStart(2, '0')}</b>`;
+    };
+
+    // Efface le score final du haut lors du redémarrage
+    const originalDisplayQuestionWithTopScore = displayQuestion;
+    displayQuestion = function () {
+        originalDisplayQuestionWithTopScore();
+        let topScoreDiv = document.getElementById('topScoreDisplay');
+        if (topScoreDiv) topScoreDiv.innerHTML = '';
+    };
+    // Permettre de changer d'utilisateur
+    userDiv.onclick = function () {
+        askUsername();
+        userDiv.innerHTML = `👤 <b>${username}</b>`;
+    };
+    userDiv.style.cursor = "pointer";
+    userDiv.title = "Cliquez pour changer de nom";
+    const scoreDiv = document.createElement('div');
+    scoreDiv.style.marginTop = "10px";
+    scoreDiv.style.fontWeight = "bold";
+    scoreDiv.id = "score";
+    document.querySelector('.container').insertBefore(scoreDiv, document.getElementById('question'));
+</script>
+<div style="text-align:center; margin-top:30px;">
+    <button class="btn-restart" onclick="displayQuestion()">Recommencer le QCM</button>
+    <div style="margin-top:24px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Function_graph.svg/200px-Function_graph.svg.png"
+            alt="Graphique fonction" style="width:120px; margin:8px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Die_face_1.svg/120px-Die_face_1.svg.png"
+            alt="Dé" style="width:60px; margin:8px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Prime_number.svg/120px-Prime_number.svg.png"
+            alt="Nombre premier" style="width:60px; margin:8px;">
+    </div>
+</div>
