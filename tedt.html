@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeu des Énigmes Mathématiques</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #3498db;
+            color: #e8f8f5;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background: #0000ff;
+            color: white;
+            padding: 1em 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background: #000099;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        select,
+        button {
+            padding: 0.5em;
+            font-size: 1em;
+            margin: 1em 0;
+            border: 1px solid #1e8449;
+            border-radius: 5px;
+            background: #0000ff;
+        }
+
+        #enigme {
+            font-size: 1.2em;
+            margin: 1.5em 0;
+        }
+
+        input[type="text"] {
+            padding: 0.5em;
+            font-size: 1em;
+            width: 60%;
+        }
+
+        #result {
+            margin-top: 1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Énigmes Mathématiques avec solution</h1>
+        <p>Niveau : Primaire, Collège, Lycée</p>
+    </header>
+
+    <div class="container">
+        <label for="niveau">Choisissez un niveau :</label>
+        <select id="niveau">
+            <option value="primaire">Primaire</option>
+            <option value="college">Collège</option>
+            <option value="lycee">Lycée</option>
+        </select>
+        <br>
+        <button onclick="genererEnigme()">Nouvelle Énigme</button>
+
+        <div id="enigme"></div>
+
+        <input type="text" id="reponse" placeholder="Votre réponse ici">
+        <br>
+        <button onclick="verifierReponse()">Vérifier</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const enigmes = {
+            primaire: [
+                { question: "Combien font 7 + 6 ?", reponse: "13" },
+                { question: "Quel est le double de 8 ?", reponse: "16" },
+                { question: "Combien y a-t-il de côtés dans un carré ?", reponse: "4" },
+                { question: "Combien y a-t-il de côtés dans un triangle ?", reponse: "3" },
+                { question: "Quel est le produit de 3 et 4 ?", reponse: "12" },
+                { question: "Quelle est la somme de 5 et 9 ?", reponse: "14" },
+                { question: "Combien font 10 - 3 ?", reponse: "7" },
+                { question: "Quel est le tiers de 9 ?", reponse: "3" },
+                { question: "Combien de jours y a-t-il dans une semaine ?", reponse: "7" },
+                { question: "Quel est le nombre suivant après 15 ?", reponse: "16" },
+                { question: "Combien font 5 x 2 ?", reponse: "10" },
+                { question: "Quel est le carré de 6 ?", reponse: "36" }
+
+
+            ],
+            college: [
+                { question: "Quel est le PGCD de 18 et 24 ?", reponse: "6" },
+                { question: "Si x + 5 = 12, combien vaut x ?", reponse: "7" },
+                { question: "Quelle est la racine carrée de 49 ?", reponse: "7" },
+                { question: "Quel est le volume d'un cube de côté 3 ?", reponse: "27" },
+                { question: "Quelle est la valeur de π (pi) arrondie à 2 décimales ?", reponse: "3.14" },
+                { question: "Si 3x = 12, quelle est la valeur de x ?", reponse: "4" },
+                { question: "Quel est le périmètre d'un rectangle de longueur 5 et largeur 3 ?", reponse: "16" },
+                { question: "Combien font 15 % de 200 ?", reponse: "30" },
+                { question: "Quelle est la somme des angles d'un triangle ?", reponse: "180" },
+                { question: "Quel est le produit de 7 et 8 ?", reponse: "56" },
+                { question: "Si a = 2 et b = 3, quelle est la valeur de a² + b² ?", reponse: "13" }
+
+            ],
+            lycee: [
+                { question: "Résous : 2x - 3 = 7", reponse: "5" },
+                { question: "Combien de solutions a l'équation x² = -1 dans ℝ ?", reponse: "0" },
+                { question: "Quelle est la dérivée de x² ?", reponse: "2x" },
+                { question: "Quel est l'intégrale de 2x par rapport à x ?", reponse: "x² + C" },
+                { question: "Si f(x) = x² + 3x, quelle est la valeur de f(2) ?", reponse: "10" },
+                { question: "Quelle est la valeur de sin(30°) ?", reponse: "0.5" },
+                { question: "Quel est le produit scalaire de (1, 2) et (3, 4) ?", reponse: "11" },
+                { question: "Si a = 5 et b = 12, quelle est la valeur de a² + b² ?", reponse: "169" },
+                { question: "Quelle est la solution de l'équation x² - 9 = 0 ?", reponse: "3 et -3" },
+                { question: "Quel est le maximum de la fonction f(x) = -x² + 4 ?", reponse: "4" },
+                { question: "Quelle est la valeur de e (base du logarithme naturel) arrondie à 2 décimales ?", reponse: "2.72" },
+                { question: "Si f(x) = 2x + 1, quelle est la valeur de f(3) ?", reponse: "7" },
+                { question: "Quelle est la somme des racines de l'équation x² - 6x + 9 = 0 ?", reponse: "6" },
+                { question: "Quel est le cosinus de 45° ?", reponse: "0.7071" },
+                { question: "Quelle est la valeur de log2(8) ?", reponse: "3" },
+                { question: "Si a = 4 et b = 5, quelle est la valeur de a³ + b³ ?", reponse: "189" },
+                { question: "Quelle est la solution de l'équation 3x + 2 = 11 ?", reponse: "3" },
+                { question: "Quel est le discriminant de l'équation x² - 6x + 9 = 0 ?", reponse: "0" },
+                { question: "Quelle est la valeur de tan(45°) ?", reponse: "1" },
+                { question: "Si f(x) = x³ - 3x + 2, quelle est la valeur de f(1) ?", reponse: "0" },
+                { question: "Quelle est la limite de (x² - 4)/(x - 2) quand x tend vers 2 ?", reponse: "4" },
+                { question: "Quel est le volume d'une sphère de rayon 3 ?", reponse: "113.1" },
+                { question: "Si a = 6 et b = 8, quelle est la valeur de a² + b² ?", reponse: "100" },
+                { question: "Si f(x) = 3x + 2, quelle est la valeur de f(4) ?", reponse: "14" },
+                { question: "Quelle est la limite de (x² - 1)/(x - 1) quand x tend vers 1 ?", reponse: "2" },
+                { question: "Quel est le discriminant de l'équation x² - 4x + 4 = 0 ?", reponse: "0" },
+                { question: "Quelle est la somme des racines de l'équation x² - 5x + 6 = 0 ?", reponse: "5" },
+                { question: "Quel est le cosinus de 60° ?", reponse: "0.5" },
+                { question: "Quelle est la valeur de log10(100) ?", reponse: "2" },
+                { question: "Si a = 3 et b = 4, quelle est la valeur de a³ + b³ ?", reponse: "91" }
+            ]
+        };
+
+        let enigmeActuelle = null;
+
+        function genererEnigme() {
+            const niveau = document.getElementById("niveau").value;
+            const liste = enigmes[niveau];
+            enigmeActuelle = liste[Math.floor(Math.random() * liste.length)];
+            document.getElementById("enigme").textContent = enigmeActuelle.question;
+            document.getElementById("reponse").value = "";
+            document.getElementById("result").textContent = "";
+        }
+
+        function verifierReponse() {
+            const reponse = document.getElementById("reponse").value.trim().toLowerCase();
+            const bonneReponse = enigmeActuelle.reponse.toLowerCase();
+            const resultat = document.getElementById("result");
+
+            if (reponse === bonneReponse) {
+                resultat.textContent = "Bravo ! Bonne réponse 🎉";
+                resultat.style.color = "green";
+            } else {
+                resultat.textContent = "Mauvaise réponse. Essayez encore !";
+                resultat.style.color = "red";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

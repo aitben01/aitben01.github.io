@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Le Compte est Bon - Solveur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div class="section-title math">Mathématiques</div>
+    <div class="container">
+        <div class="levels-container" style="display: flex; gap: 16px; justify-content: center; margin-bottom: 24px;">
+            <div class="level-card">
+                <a href="Accueil.html">Accueil</a>
+            </div>
+            <div class="level-card">
+                <a href="pre-scolaire.html">Pré-scol</a>
+            </div>
+            <div class="level-card">
+                <a href="primaire.html">Primaire</a>
+            </div>
+            <div class="level-card">
+                <a href="Collège.html">Collège</a>
+            </div>
+            <div class="level-card">
+                <a href="lycee.html">Lycée</a>
+            </div>
+        </div>
+    </div>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #1163b4;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .card {
+            background: white;
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+
+        .target {
+            font-size: 1.8em;
+            margin: 20px 0;
+        }
+
+        .target {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .parag {
+            font-size: 1.1em;
+            color: #0505054f;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-weight: 500;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            padding: 10px;
+            background: #d9e7d7;
+            border: 1px solid #115002;
+            box-shadow: 0 12px 15px rgba(31, 1, 1, 0.1);
+        }
+
+        .container {
+            width: 1200px;
+            margin: 40px;
+            background: #4e4ee70e;
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(240, 237, 237, 0.884);
+            padding: 32px 24px 24px 24px;
+
+        }
+
+
+        input,
+        button {
+            font-size: 1em;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 80%;
+        }
+
+        button {
+            background: #27ae60;
+            color: rgb(245, 236, 236);
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #219150;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        #timer {
+            font-size: 1.2em;
+            color: #d35400;
+        }
+
+        #solutionAuto {
+            color: #34495e;
+            font-style: italic;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>🎯 Le Compte est Bon</h1>
+        <p class="parag">Utilise les nombres ci-dessous pour atteindre la cible ou clique sur "🔎 Solution
+            automatique".
+            <br>
+            <span style="font-size:0.95em;color:#5e0404;">
+                Le but : atteindre un résultat cible en combinant des nombres proposés avec les opérations +, -, ×, ÷.
+            </span>
+
+        </p>
+
+        <div class="numbers" id="numbers"></div>
+        <div class="target" id="target"></div>
+
+        <!-- <div id="timer">⏱ Temps restant : 45 secondes</div> -->
+
+        <input type="text" id="solution" placeholder="Tape ton calcul ici (ex : (100 + 50) / 2)" />
+        <br>
+        <button onclick="checkSolution()">Vérifier</button>
+        <button onclick="generateGame()">🔄 Nouveau tirage</button>
+        <button onclick="solve()">🔎 Solution automatique</button>
+
+        <div id="message"></div>
+        <div id="solutionAuto"></div>
+    </div>
+
+    <script>
+        let selectedNumbers = [];
+        let targetValue = 0;
+        let timerInterval;
+        let timeLeft = 45;
+
+        function generateGame() {
+            clearInterval(timerInterval);
+            timeLeft = 45;
+            document.getElementById('message').innerText = "";
+            document.getElementById('solution').value = "";
+            document.getElementById('solutionAuto').innerText = "";
+
+            const small = Array.from({ length: 10 }, (_, i) => i + 1);
+            const large = [25, 50, 75, 100];
+            const allNumbers = small.concat(large);
+            selectedNumbers = [];
+
+            while (selectedNumbers.length < 6) {
+                const randIndex = Math.floor(Math.random() * allNumbers.length);
+                selectedNumbers.push(allNumbers[randIndex]);
+            }
+
+            targetValue = Math.floor(Math.random() * 900) + 100;
+
+            document.getElementById('numbers').innerText = "Nombres : " + selectedNumbers.join(" | ");
+            document.getElementById('target').innerText = "Cible : " + targetValue;
+
+            startTimer();
+        }
+
+        function startTimer() {
+            document.getElementById('timer').innerText = `⏱ Temps restant : ${timeLeft} secondes`;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = `⏱ Temps restant : ${timeLeft} secondes`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('message').innerText = "⛔ Temps écoulé ! Essaie un nouveau tirage.";
+                }
+            }, 1000);
+        }
+
+        function checkSolution() {
+            const userInput = document.getElementById('solution').value;
+            try {
+                const result = eval(userInput);
+                if (Math.abs(result - targetValue) < 0.0001) {
+                    document.getElementById('message').innerHTML = "✅ Bravo ! Tu as trouvé la bonne réponse.";
+                    clearInterval(timerInterval);
+                } else {
+                    document.getElementById('message').innerHTML = `❌ Mauvais résultat (${result}). Cible = ${targetValue}`;
+                }
+            } catch (error) {
+                document.getElementById('message').innerHTML = "⚠️ Calcul invalide. Vérifie ta syntaxe.";
+            }
+        }
+
+        function solve() {
+            const ops = ['+', '-', '*', '/'];
+            const permute = arr => arr.length <= 1 ? [arr] : arr.flatMap((e, i) =>
+                permute([...arr.slice(0, i), ...arr.slice(i + 1)]).map(p => [e, ...p])
+            );
+
+            function generateExpressions(nums) {
+                if (nums.length === 1) return [nums[0].toString()];
+                const results = [];
+                for (let i = 1; i < nums.length; i++) {
+                    const left = nums.slice(0, i);
+                    const right = nums.slice(i);
+                    const leftExprs = generateExpressions(left);
+                    const rightExprs = generateExpressions(right);
+                    for (let l of leftExprs) {
+                        for (let r of rightExprs) {
+                            for (let op of ops) {
+                                results.push(`(${l}${op}${r})`);
+                            }
+                        }
+                    }
+                }
+                return results;
+            }
+
+            const perms = permute(selectedNumbers);
+            for (let p of perms) {
+                const exprs = generateExpressions(p);
+                for (let expr of exprs) {
+                    try {
+                        if (Math.abs(eval(expr) - targetValue) < 0.0001) {
+                            document.getElementById('solutionAuto').innerText = "💡 Solution trouvée : " + expr + " = " + targetValue;
+                            return;
+                        }
+                    } catch { }
+                }
+            }
+            document.getElementById('solutionAuto').innerText = "❌ Aucune solution exacte trouvée.";
+        }
+
+        window.onload = generateGame;
+    </script>
+</body>
+
+</html>
+<p>Amuse-toi avec des jeux mathématiques interactifs adaptés à tous les niveaux.</p>
+</div>
+
+<div class="feature">
+    <!-- <img src="./jeux math.webp" alt="Quiz Mathématiques"> -->
+    <a href="./Quis.html" target="_blank" style="display:inline-block;">
+        <img src="./jeux math.webp" alt="Quiz Mathématiques" style="border:none;" />
+    </a>
+    <h3>Quiz Mathématiques</h3>
+    <p>Teste tes connaissances avec des quiz variés et amusants.</p>
+</div>
+
+<div class="feature">
+    <!-- <img src="./imagesmaths.webp" alt="Défis Mathématiques"> -->
+    <a href="./Défis.html" target="_blank" style="display:inline-block;">
+        <img src="./imagesmaths.webp" alt="Défis Mathématiques" style="border:none;" />
+    </a>
+    <h3>Défis Mathématiques</h3>
+    <p>Relève des défis stimulants pour améliorer tes compétences.</p>
+</div>
+
+</div>
+
+<footer>
+    &copy; 2023 Maison Des Maths. Tous droits réservés.
+
+</footer>
+</div>
+<style>
+    body {
+        background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .feature {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+        max-width: 350px;
+        margin: 30px auto 30px auto;
+        padding: 25px 20px 20px 20px;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature:hover {
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 8px 24px rgba(44, 62, 80, 0.15);
+    }
+
+    .feature img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        border: 3px solid #e0eafc;
+        background: #f8fafc;
+    }
+
+    .feature h3 {
+        color: #2980b9;
+        margin-bottom: 10px;
+        font-size: 1.3em;
+    }
+
+    .feature p {
+        color: #555;
+        font-size: 1em;
+        margin: 0;
+    }
+
+    footer {
+        background: #34495e;
+        color: #fff;
+        text-align: center;
+        padding: 18px 0 12px 0;
+        font-size: 1em;
+        letter-spacing: 1px;
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+        margin-top: 40px;
+        box-shadow: 0 -2px 10px rgba(44, 62, 80, 0.08);
+    }
+
+    @media (max-width: 900px) {
+        .card {
+            max-width: 98vw;
+            padding: 18px;
+        }
+
+        .feature {
+            max-width: 95vw;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .card {
+            padding: 10px;
+        }
+
+        .feature {
+            padding: 12px 5px 10px 5px;
+        }
+
+        .feature img {
+            width: 60px;
+            height: 60px;
+        }
+    }
+</style>
