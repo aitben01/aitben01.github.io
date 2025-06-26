@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Défi Maths du Jour - Primaire - CE2 - CM1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9fcff;
+            padding: 30px;
+        }
+
+        .container {
+            background: #fff;
+            max-width: 370px;
+            margin: auto;
+            padding: 26px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        h2 {
+            color: #2877b3;
+        }
+
+        .question {
+            font-size: 1.3em;
+            margin: 22px 0 16px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            font-size: 1.2em;
+            padding: 8px;
+            width: 90px;
+            margin: 10px 0;
+            border: 1px solid #b2c9e6;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 22px;
+            font-size: 1em;
+            background: #e1f0fa;
+            border: 1px solid #a5c6e4;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            background: #b2d6f9;
+        }
+
+        .result {
+            font-size: 1.15em;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: #228B22;
+        }
+
+        .incorrect {
+            color: #B22222;
+        }
+
+        .refresh {
+            color: #555;
+            font-size: 0.95em;
+            margin-top: 18px;
+            display: block;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .refresh:hover {
+            color: #2877b3;
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        nav {
+            background: #2877b3;
+            padding: 12px 0;
+            margin-bottom: 28px;
+            border-radius: 8px;
+            box-shadow: 0 1px 6px rgba(40, 119, 179, 0.08);
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 18px;
+            font-size: 1.08em;
+            font-weight: 500;
+            transition: color 0.2s, background 0.2s;
+            padding: 7px 14px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            background: #e1f0fa;
+            color: #2877b3;
+        }
+    </style>
+    <nav>
+        <a href="Accueil.html#">Accueil</a>
+        <a href="NiveauxScolaires.html">Niveaux Scolaire</a>
+        <a href="Contact.html">Contact</a>
+        <a href="Quis.html">Quiz</a>
+        <a href="Défis.html">Défis</a>
+        <a href="jeux.html">Jeux</a>
+    </nav>
+    <div class="container">
+        <h2>Défi Maths du Jour</h2>
+        <div id="question" class="question"></div>
+        <input type="number" id="answer" placeholder="Votre réponse">
+        <div>
+            <button onclick="checkAnswer()">Vérifier</button>
+        </div>
+        <div id="result" class="result"></div>
+        <span class="refresh" onclick="resetChallenge()">Un autre défi</span>
+    </div>
+    <script>
+        // Génère un défi "du jour" basé sur la date pour que ce soit stable dans la journée
+        function getSeed() {
+            const now = new Date();
+            return now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+        }
+
+        // Défis adaptés aux 1ère et 2ème primaire
+        function generateChallenge(seed) {
+            // Liste de types de défis faciles (add, sub, compare, count objects)
+            const types = ["add", "sub", "compare", "evenOdd"];
+
+            // On rend la sélection stable avec le seed (pour que le défi ne change pas dans la journée)
+            function seededRandom(seed) {
+                var x = Math.sin(seed) * 10000; return x - Math.floor(x);
+            }
+            const challengeType = types[Math.floor(seededRandom(seed) * types.length)];
+
+            let q = {}, n1, n2;
+            switch (challengeType) {
+                case "add":
+                    n1 = Math.floor(seededRandom(seed + 1) * 10) + 1; // 1 à 10
+                    n2 = Math.floor(seededRandom(seed + 2) * 9) + 1;  // 1 à 9
+                    q.text = `Combien font ${n1} + ${n2} ?`;
+                    q.answer = n1 + n2;
+                    break;
+                case "sub":
+                    n1 = Math.floor(seededRandom(seed + 3) * 10) + 5; // 5 à 14
+                    n2 = Math.floor(seededRandom(seed + 4) * 5) + 1;  // 1 à 5
+                    q.text = `Combien font ${n1} - ${n2} ?`;
+                    q.answer = n1 - n2;
+                    break;
+                case "compare":
+                    n1 = Math.floor(seededRandom(seed + 5) * 20) + 1;
+                    n2 = Math.floor(seededRandom(seed + 6) * 20) + 1;
+                    q.text = `Quel est le plus grand ? ${n1} ou ${n2} ?`;
+                    q.answer = (n1 > n2 ? n1 : n2);
+                    break;
+                case "evenOdd":
+                    n1 = Math.floor(seededRandom(seed + 7) * 20) + 1;
+                    q.text = `Le nombre ${n1} est-il pair ou impair ? (Écrire "pair" ou "impair")`;
+                    q.answer = (n1 % 2 === 0 ? "pair" : "impair");
+                    break;
+            }
+            q.type = challengeType;
+            return q;
+        }
+
+        let currentChallenge = null;
+
+        function displayChallenge() {
+            const seed = getSeed();
+            currentChallenge = generateChallenge(seed);
+            document.getElementById('question').textContent = currentChallenge.text;
+            document.getElementById('answer').value = '';
+            document.getElementById('result').textContent = '';
+        }
+
+        function checkAnswer() {
+            const user = document.getElementById('answer').value.trim();
+            if (currentChallenge.type === "evenOdd") {
+                if (user.toLowerCase() === currentChallenge.answer) {
+                    showResult(true);
+                } else {
+                    showResult(false, `Réponse attendue : ${currentChallenge.answer}`);
+                }
+            } else if (currentChallenge.type === "compare") {
+                if (parseInt(user) === currentChallenge.answer) {
+                    showResult(true);
+                } else {
+                    showResult(false, `Réponse attendue : ${currentChallenge.answer}`);
+                }
+            } else {
+                if (parseInt(user) === currentChallenge.answer) {
+                    showResult(true);
+                } else {
+                    showResult(false, `Réponse attendue : ${currentChallenge.answer}`);
+                }
+            }
+        }
+
+        function showResult(isCorrect, correction = "") {
+            const resultEl = document.getElementById('result');
+            if (isCorrect) {
+                resultEl.textContent = "Bravo ! C'est la bonne réponse 🎉";
+                resultEl.className = "result correct";
+            } else {
+                resultEl.textContent = "Essaye encore ! " + correction;
+                resultEl.className = "result incorrect";
+            }
+        }
+
+        // Pour générer un autre défi (utile pour tester)
+        function resetChallenge() {
+            // On change le seed pour un défi différent, même dans la même journée
+            const extra = Math.floor(Math.random() * 10000);
+            currentChallenge = generateChallenge(getSeed() + extra);
+            document.getElementById('question').textContent = currentChallenge.text;
+            document.getElementById('answer').value = '';
+            document.getElementById('result').textContent = '';
+        }
+
+        displayChallenge();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Caractériser un nom</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8ff;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2a4d8f;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            padding: 10px 15px;
+            background: #2a4d8f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            background: #e8f0fe;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Caractériser un nom</h1>
+
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" placeholder="Ex : pomme, garçons...">
+
+        <label for="genre">Genre :</label>
+        <select id="genre">
+            <option value="">--Choisir--</option>
+            <option value="masculin">Masculin</option>
+            <option value="féminin">Féminin</option>
+        </select>
+
+        <label for="nombre">Nombre :</label>
+        <select id="nombre">
+            <option value="">--Choisir--</option>
+            <option value="singulier">Singulier</option>
+            <option value="pluriel">Pluriel</option>
+        </select>
+
+        <label for="determinant">Déterminant :</label>
+        <input type="text" id="determinant" placeholder="Ex : le, la, les, une...">
+
+        <button onclick="caracteriserNom()">Afficher la caractérisation</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function caracteriserNom() {
+            const nom = document.getElementById("nom").value.trim();
+            const genre = document.getElementById("genre").value;
+            const nombre = document.getElementById("nombre").value;
+            const determinant = document.getElementById("determinant").value.trim();
+
+            const result = document.getElementById("result");
+
+            if (!nom || !genre || !nombre || !determinant) {
+                result.style.display = "block";
+                result.style.color = "red";
+                result.textContent = "Veuillez remplir tous les champs.";
+                return;
+            }
+
+            result.style.display = "block";
+            result.style.color = "black";
+            result.innerHTML = `
+        ➤ Le nom <strong>${nom}</strong> est <strong>${genre}</strong> et <strong>${nombre}</strong>.<br>
+        ➤ Son déterminant est : <strong>${determinant}</strong>.
+      `;
+        }
+        /* Exercice corrigé : Afficher un exemple de caractérisation automatique */
+        function exempleCorrige() {
+            document.getElementById("nom").value = "chats";
+            document.getElementById("genre").value = "masculin";
+            document.getElementById("nombre").value = "pluriel";
+            document.getElementById("determinant").value = "les";
+            caracteriserNom();
+        }
+
+        // Ajout d'un bouton pour l'exercice corrigé
+        const btn = document.createElement("button");
+        btn.textContent = "Voir un exemple corrigé";
+        btn.style.marginLeft = "10px";
+        btn.onclick = exempleCorrige;
+        document.querySelector(".container button").after(btn);
+
+    </script>
+
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QCM - Caractériser un nom</title>
+    <style>
+        nav {
+            background: #2877b3;
+            padding: 12px 0;
+            margin-bottom: 28px;
+            border-radius: 8px;
+            box-shadow: 0 1px 6px rgba(40, 119, 179, 0.08);
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 18px;
+            font-size: 1.08em;
+            font-weight: 500;
+            transition: color 0.2s, background 0.2s;
+            padding: 7px 14px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            background: #e1f0fa;
+            color: #2877b3;
+        }
+    </style>
+    <nav>
+        <a href="Accueil.html#">Accueil</a>
+        <a href="NiveauxScolaires.html">Niveaux Scolaire</a>
+        <a href="Contact.html">Contact</a>
+        <a href="Quis.html">Quiz</a>
+        <a href="Défis.html">Défis</a>
+        <a href="jeux.html">Jeux</a>
+    </nav>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 20px;
+        }
+
+        .quiz {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+        }
+
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="quiz">
+        <h2>QCM – Caractériser un nom</h2>
+
+        <div class="question">
+            <p>1. Dans la phrase « Une maison ancienne », « ancienne » est :</p>
+            <label><input type="radio" name="q1" value="a"> Un adjectif qualificatif épithète</label>
+            <label><input type="radio" name="q1" value="b"> Un adjectif qualificatif attribut</label>
+            <label><input type="radio" name="q1" value="c"> Un complément de nom</label>
+        </div>
+
+        <div class="question">
+            <p>2. Dans « Ce tableau est magnifique », « magnifique » est :</p>
+            <label><input type="radio" name="q2" value="a"> Complément de nom</label>
+            <label><input type="radio" name="q2" value="b"> Adjectif qualificatif attribut</label>
+            <label><input type="radio" name="q2" value="c"> Subordonnée relative</label>
+        </div>
+
+        <div class="question">
+            <p>3. « Les enfants de l’école jouent dans la cour. » — Le groupe « de l’école » est :</p>
+            <label><input type="radio" name="q3" value="a"> Adjectif épithète</label>
+            <label><input type="radio" name="q3" value="b"> Complément de nom</label>
+            <label><input type="radio" name="q3" value="c"> Attribut du sujet</label>
+        </div>
+
+        <div class="question">
+            <p>4. « Le livre qu’il a acheté est passionnant. » — La proposition « qu’il a acheté » est :</p>
+            <label><input type="radio" name="q4" value="a"> Complément d’objet</label>
+            <label><input type="radio" name="q4" value="b"> Subordonnée relative</label>
+            <label><input type="radio" name="q4" value="c"> Attribut du sujet</label>
+        </div>
+
+        <button onclick="corriger()">Corriger</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function corriger() {
+            const réponses = {
+                q1: 'a',
+                q2: 'b',
+                q3: 'b',
+                q4: 'b'
+            };
+            let score = 0;
+            for (let i = 1; i <= 4; i++) {
+                const q = document.querySelector(`input[name="q${i}"]:checked`);
+                if (q && q.value === réponses[`q${i}`]) score++;
+            }
+            const result = document.getElementById("result");
+            result.textContent = `Votre score : ${score} / 4`;
+            result.style.color = score === 4 ? "green" : "orange";
+        }
+    </script>
+
+</body>
+
+</html>
