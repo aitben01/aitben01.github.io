@@ -1,186 +1,87 @@
 <!DOCTYPE html>
 <html lang="fr">
-<!-- Menu commun à inclure sur toutes les pages -->
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maths Magiques - Accueil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
-    <link rel="icon" href="./mathslogo.png" type="image/png">
-    <meta name="description"
-        content="Découvrez les mathématiques de manière ludique et interactive. Apprenez, jouez et progressez avec Maths Magiques !">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Projet AIT</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Fredoka', Arial, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #a7e9af 100%);
-            color: #222;
-        }
+    header {
+      background-color: #6a1b9a;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
 
-        header {
-            background: #4f8cff;
-            color: #fff;
-            padding: 30px 0 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-        }
+    nav {
+      background-color: #8e24aa;
+      overflow: hidden;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            letter-spacing: 2px;
-        }
+    nav a {
+      float: left;
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
 
-        header p {
-            margin: 10px 0 0 0;
-            font-size: 1.3rem;
-        }
+    nav a:hover {
+      background-color: #ab47bc;
+    }
 
-        nav {
-            margin: 30px 0 0 0;
-            text-align: center;
-        }
+    main {
+      padding: 20px;
+      background-color: #fff;
+      min-height: 70vh;
+    }
 
-        nav a {
-            display: inline-block;
-            margin: 0 18px;
-            padding: 12px 28px;
-            background: #fff;
-            color: #4f8cff;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
-            transition: background 0.2s, color 0.2s;
-        }
-
-        nav a:hover {
-            background: #4f8cff;
-            color: #fff;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .feature {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 2px 12px rgba(79, 140, 255, 0.07);
-            padding: 30px 24px;
-            width: 260px;
-            min-height: 220px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.2s;
-        }
-
-        .feature:hover {
-            transform: translateY(-8px) scale(1.04);
-            box-shadow: 0 4px 16px rgba(2, 235, 72, 0.87);
-        }
-
-        .feature img {
-            width: 60px;
-            margin-bottom: 18px;
-        }
-
-        .feature h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.2rem;
-            color: #4f8cff;
-        }
-
-        .feature p {
-            margin: 0;
-            font-size: 1rem;
-            color: #444;
-        }
-
-        footer {
-            margin-top: 60px;
-            padding: 18px 0;
-            background: #e3f0ff;
-            color: #4f8cff;
-            text-align: center;
-            font-size: 1rem;
-        }
-
-        @media (max-width: 800px) {
-            .features {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+    footer {
+      background-color: #6a1b9a;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <h1>Maison Des Maths</h1>
-        <p>Découvre les mathématiques de façon ludique et interactive !</p>
-        <nav>
-            <a href="Accueil.html#">Accueil</a>
-            <a href="NiveauxScolaires.html">Niveaux Scolaire</a>
-            <a href="Contact.html">Contact</a>
-            <a href="Quis.html">Quiz</a>
-            <a href="Défis.html">Défis</a>
-            <a href="jeux.html">Jeux</a>
-        </nav>
-    </header>
-    <div class="container">
-        <h2>Bienvenue sur Maison Des Maths !</h2>
-        <p>
-            Apprends, joue et progresse en mathématiques grâce à des activités amusantes, des jeux interactifs et des
-            défis adaptés à tous les niveaux, du primaire au lycée.
-        </p>
-        <div class="features">
-            <div class="feature">
-                <img src="https://img.icons8.com/color/96/000000/math.png" alt="Jeux Mathématiques">
-                <h3>Jeux Mathématiques</h3>
-                <p>Résous des énigmes, puzzles et casse-têtes pour t'amuser tout en apprenant.</p>
-                <a href="jeux.html"
-                    style="margin-top:16px; display:inline-block; color:#4f8cff; text-decoration:underline; font-weight:bold;">Découvrir
-                    les jeux</a>
-            </div>
-            <div class="feature">
-                <img src="https://img.icons8.com/color/96/000000/open-book--v2.png" alt="Cours Interactifs">
-                <h3>Cours Interactifs</h3>
-                <p>Des leçons claires et illustrées pour comprendre chaque notion facilement.</p>
-                <a href="NiveauxScolaires.html"
-                    style="margin-top:16px; display:inline-block; color:#4f8cff; text-decoration:underline; font-weight:bold;">Explorer
-                    les niveaux scolaires</a>
-            </div>
-            <div class="feature">
-                <img src="./quis22.png" alt="Quiz et Défis">
-                <h3>Quiz & Défis</h3>
-                <p>Teste tes connaissances et défie tes amis avec des quiz adaptés à ton niveau.</p>
-                <a href="Quis.html"
-                    style="margin-top:16px; display:inline-block; color:#4f8cff; text-decoration:underline; font-weight:bold;">Participer
-                    aux quiz</a>
-            </div>
-        </div>
-    </div>
-    <footer>
-        © Entrez dans la Maison des Maths — Un espace dédié aux maths, pour grandir avec logique et curiosité. Un lieu
-        pour aimer les maths, tout simplement.
-    </footer>
-</body>
 
+  <header>
+    <h1>Bienvenue sur le site éducatif AIT</h1>
+    <p>Ressources scolaires pour tous les niveaux</p>
+  </header>
+
+  <nav>
+    <a href="Accueil.html">Accueil</a>
+    <a href="primaire.html">Primaire</a>
+    <a href="pre-scolaire.html">Pré-scolaire</a>
+    <a href="college.html">Collège</a>
+    <a href="lycee.html">Lycée</a>
+    <a href="jeux.html">Jeux éducatifs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <h2>À propos du projet</h2>
+    <p>Ce site propose des ressources en mathématiques, arabe et autres matières pour les élèves du primaire au lycée. 
+    Vous y trouverez des quiz, des exercices, des défis et des jeux pour apprendre tout en s'amusant.</p>
+  </main>
+
+  <footer>
+    &copy; 2025 Projet AIT - Tous droits réservés.
+  </footer>
+
+</body>
 </html>
+
