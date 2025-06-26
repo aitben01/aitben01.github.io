@@ -1,185 +1,64 @@
-<!DOCTYPE html>
-<html lang="fr">
-<!-- Menu commun à inclure sur toutes les pages -->
+<p align="center">
+  <img src="./mathslogo.png" width="120" alt="Logo Maison des Maths">
+</p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maths Magiques - Accueil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
-    <link rel="icon" href="./mathslogo.png" type="image/png">
-    <meta name="description"
-        content="Découvrez les mathématiques de manière ludique et interactive. Apprenez, jouez et progressez avec Maths Magiques !">
-    <link rel="stylesheet" href="style.css">
+<h1 align="center" style="color:#4f8cff;font-family:Fredoka, Arial, sans-serif;">
+  Maison Des Maths
+</h1>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Fredoka', Arial, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #a7e9af 100%);
-            color: #222;
-        }
+<p align="center" style="font-size:1.3rem;color:#222;">
+  <em>Découvre les mathématiques de façon ludique et interactive !</em>
+</p>
 
-        header {
-            background: #4f8cff;
-            color: #fff;
-            padding: 30px 0 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-        }
+---
 
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            letter-spacing: 2px;
-        }
+<p align="center">
+  <a href="Accueصil.html#">Accueil</a> •
+  <a href="NiveauxScolaires.html">Niveaux Scolaire</a> •
+  <a href="Contact.html">Contact</a> •
+  <a href="Quis.html">Quiz</a> •
+  <a href="Défis.html">Défis</a> •
+  <a href="jeux.html">Jeux</a>
+</p>
 
-        header p {
-            margin: 10px 0 0 0;
-            font-size: 1.3rem;
-        }
+---
 
-        nav {
-            margin: 30px 0 0 0;
-            text-align: center;
-        }
+## 🎲 Bienvenue sur Maison Des Maths !
 
-        nav a {
-            display: inline-block;
-            margin: 0 18px;
-            padding: 12px 28px;
-            background: #fff;
-            color: #4f8cff;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
-            transition: background 0.2s, color 0.2s;
-        }
+Apprends, joue et progresse en mathématiques grâce à des activités amusantes, des jeux interactifs et des défis adaptés à tous les niveaux, du primaire au lycée.
 
-        nav a:hover {
-            background: #4f8cff;
-            color: #fff;
-        }
+---
 
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
+## ✨ Nos fonctionnalités
 
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
+| ![Jeux Mathématiques](https://img.icons8.com/color/96/000000/math.png) | ![Cours Interactifs](https://img.icons8.com/color/96/000000/open-book--v2.png) | ![Quiz et Défis](https://img.icons8.com/color/96/000000/confetti.png) |
+|:---:|:---:|:---:|
+| **Jeux Mathématiques**<br>Résous des énigmes, puzzles et casse-têtes pour t'amuser tout en apprenant.<br><a href="jeux.html">Découvrir les jeux</a> | **Cours Interactifs**<br>Des leçons claires et illustrées pour comprendre chaque notion facilement.<br><a href="NiveauxScolaires.html">Explorer les niveaux scolaires</a> | **Quiz & Défis**<br>Teste tes connaissances et défie tes amis avec des quiz adaptés à ton niveau.<br><a href="Quis.html">Participer aux quiz</a> |
 
-        .feature {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 2px 12px rgba(79, 140, 255, 0.07);
-            padding: 30px 24px;
-            width: 260px;
-            min-height: 220px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.2s;
-        }
+---
 
-        .feature:hover {
-            transform: translateY(-8px) scale(1.04);
-            box-shadow: 0 4px 16px rgba(2, 235, 72, 0.87);
-        }
+## 📚 Pour qui ?
 
-        .feature img {
-            width: 60px;
-            margin-bottom: 18px;
-        }
+- Élèves du primaire jusqu’au lycée
+- Enseignants souhaitant des supports interactifs et ludiques
+- Parents qui veulent accompagner leurs enfants dans la découverte des maths
 
-        .feature h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.2rem;
-            color: #4f8cff;
-        }
+---
 
-        .feature p {
-            margin: 0;
-            font-size: 1rem;
-            color: #444;
-        }
+## 📬 Contact
 
-        footer {
-            margin-top: 60px;
-            padding: 18px 0;
-            background: #e3f0ff;
-            color: #4f8cff;
-            text-align: center;
-            font-size: 1rem;
-        }
+Une question, une suggestion ou envie de rejoindre l’aventure ?  
+📧 [Nous contacter](Contact.html)
 
-        @media (max-width: 800px) {
-            .features {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
-</head>
+---
 
-<body>
-    <header>
-        <h1>Maison Des Maths</h1>
-        <p>Découvre les mathématiques de façon ludique et interactive !</p>
-        <nav>
-            <a href="Accueصil.html#">Accueil</a>
-            <a href="NiveauxScolaires.html">Niveaux Scolaire</a>
-            <a href="Contact.html">Contact</a>
-            <a href="Quis.html">Quiz</a>
-            <a href="Défis.html">Défis</a>
-            <a href="jeux.html">Jeux</a>
-        </nav>
-    </header>
-    <div class="container">
-        <h2>Bienvenue sur Maison Des Maths !</h2>
-        <p>
-            Apprends, joue et progresse en mathématiques grâce à des activités amusantes, des jeux interactifs et des
-            défis adaptés à tous les niveaux, du primaire au lycée.
-        </p>
-        <div class="features">
-            <div class="feature">
-                <img src="https://img.icons8.com/color/96/000000/math.png" alt="Jeux Mathématiques">
-                <h3>Jeux Mathématiques</h3>
-                <p>Résous des énigmes, puzzles et casse-têtes pour t'amuser tout en apprenant.</p>
-                <a href="jeux.html"
-                    style="margin-top:16px; display:inline-block; color:#4f8cff; text-decoration:underline; font-weight:bold;">Découvrir
-                    les jeux</a>
-            </div>
-            <div class="feature">
-                <img src="https://img.icons8.com/color/96/000000/open-book--v2.png" alt="Cours Interactifs">
-                <h3>Cours Interactifs</h3>
-                <p>Des leçons claires et illustrées pour comprendre chaque notion facilement.</p>
-                <a href="NiveauxScolaires.html"
-                    style="margin-top:16px; display:inline-block; color:#4f8cff; text-decoration:underline; font-weight:bold;">Explorer
-                    les niveaux scolaires</a>
-            </div>
-            <div class="feature">
-                <img src="./" alt="Quiz et Défis">
-                <h3>Quiz & Défis</h3>
-                <p>Teste tes connaissances et défie tes amis avec des quiz adaptés à ton niveau.</p>
-                <a href="Quis.html"
-                    style="margin-top:16px; display:inline-block; color:#4f8cff; text-decoration:underline; font-weight:bold;">Participer
-                    aux quiz</a>
-            </div>
-        </div>
-    </div>
-    <footer>
-        © Un lieu magique, une passion logique : bienvenue à la Maison des Maths.
-    </footer>
-</body>
+## 🧩 À propos
 
-</html>
+**Maison Des Maths** est un site dédié à rendre l’apprentissage des mathématiques accessible, amusant et interactif.  
+Notre équipe passionnée conçoit des ressources originales, des jeux et défis pour stimuler la curiosité et le plaisir de progresser en maths.
+
+---
+
+<p align="center" style="color:#4f8cff;background:#e3f0ff;padding:12px 0;border-radius:8px;">
+  © Un lieu magique, une passion logique : bienvenue à la Maison des Maths.
+</p>
