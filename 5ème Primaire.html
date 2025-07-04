@@ -1,0 +1,178 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathématiques - 5ème Année Primaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Baloo 2', cursive, Arial, sans-serif;
+            background: linear-gradient(135deg, #f8ffae 0%, #43c6ac 100%);
+            min-height: 100vh;
+        }
+        header {
+            background: #7be006;
+            color: #0e1cd8;
+            padding: 30px 0 20px 0;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 4px 20px rgba(70, 80, 78, 0.2);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(67,198,172,0.15);
+            width: 260px;
+            padding: 25px 20px 20px 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(245, 3, 172, 0.781);
+        }
+        .card img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        .card h2 {
+            font-size: 1.2em;
+            margin: 10px 0 15px 0;
+            color: #43c6ac;
+        }
+        .card a {
+            display: inline-block;
+            margin: 8px 6px 0 6px;
+            padding: 8px 16px;
+            background: #43c6ac;
+            color: #fff;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .card a:hover {
+            background: #f8ffae;
+            color: #43c6ac;
+        }
+        @media (max-width: 800px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mathématiques - 5ème Année Primaire</h1>
+        <p>Ressources modernes et interactives pour apprendre en s'amusant !</p>
+    </header>
+    <main class="container">
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/image.png" alt="Images">
+            <h2>Images</h2>
+            <a href="images/math1.jpg" target="_blank">Voir</a>
+            <a href="images/math1.zip" download>Télécharger</a>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/ms-word.png" alt="Word">
+            <h2>Fichiers Word</h2>
+            <a href="docs/lesson1.docx" target="_blank">Voir</a>
+            <a href="docs/lesson1.docx" download>Télécharger</a>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/pdf.png" alt="PDF">
+            <h2>Fichiers PDF</h2>
+            <a href="docs/lesson1.pdf" target="_blank">Voir</a>
+            <a href="docs/lesson1.pdf" download>Télécharger</a>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/ms-powerpoint.png" alt="PowerPoint">
+            <h2>Présentations PPT</h2>
+            <a href="../aitben01.github.io/Maths_Niv1_Période1_Semaine1_Séance1-Drive-.pptx" target="_blank">Voir</a>
+            <a href="../aitben01.github.io/Maths_Niv1_Période1_Semaine1_Séance1-Drive-.pptx" download>Télécharger</a>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/video.png" alt="Vidéo">
+            <h2>Vidéos</h2>
+            <a href="#" id="openVideo">Regarder</a>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/audio.png" alt="Audio">
+            <h2>Fichiers Audio</h2>
+            <a href="audio/lesson1.mp3" target="_blank">Écouter</a>
+            <a href="audio/lesson1.mp3" download>Télécharger</a>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/quiz.png" alt="Quiz">
+            <h2>Quiz</h2>
+            <a href="quizzes/math1.html" target="_blank">Faire le Quiz</a>
+            <a href="quizzes/math1.zip" download>Télécharger</a>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/exercise.png" alt="Exercices">
+            <h2>Exercices</h2>
+            <a href="exercises/math1.html" target="_blank">Faire les Exercices</a>
+            <a href="exercises/math1.zip" download>Télécharger</a>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/000000/lesson.png" alt="Leçon">
+            <h2>Leçon</h2>
+            <a href="lessons/math1.html" target="_blank">Lire la Leçon</a>
+            <a href="lessons/math1.zip" download>Télécharger</a>
+        </div>
+
+
+
+    </main>
+    <!-- Modal Video -->
+    <div id="videoModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center; z-index:1000;">
+        <div style="background:#fff; border-radius:16px; padding:20px; max-width:90vw; max-height:80vh; position:relative;">
+            <button id="closeVideo" style="position:absolute; top:10px; right:10px; background:#43c6ac; color:#fff; border:none; border-radius:50%; width:32px; height:32px; font-size:1.2em; cursor:pointer;">&times;</button>
+            <video id="mathVideo" width="600" controls style="max-width:80vw; max-height:60vh;">
+                <source src="videos/math1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+        </div>
+    </div>
+    <script>
+        // Modal video logic
+        document.getElementById('openVideo').onclick = function(e) {
+            e.preventDefault();
+            document.getElementById('videoModal').style.display = 'flex';
+            document.getElementById('mathVideo').play();
+        };
+        document.getElementById('closeVideo').onclick = function() {
+            document.getElementById('videoModal').style.display = 'none';
+            document.getElementById('mathVideo').pause();
+        };
+        // Close modal on outside click
+        document.getElementById('videoModal').onclick = function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                document.getElementById('mathVideo').pause();
+            }
+        };
+    </script>
+</body>
+</html>
